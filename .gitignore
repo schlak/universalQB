@@ -1,0 +1,10 @@
+#Intellij
+/src/old/
+/out/
+/production/
+/.idea/
+/target/
+*.iml
+*.log
+/src/stuff/
+/classes/
