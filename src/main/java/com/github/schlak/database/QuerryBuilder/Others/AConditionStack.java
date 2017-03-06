@@ -1,7 +1,7 @@
-package com.schlak.Database.QuerryBuilder.Others;
+package com.github.schlak.database.QuerryBuilder.Others;
 
-import com.schlak.Database.ConditionLinkType;
-import com.schlak.Database.QuerryBuilder.PreparedStatementPart;
+import com.github.schlak.database.ConditionLinkType;
+import com.github.schlak.database.QuerryBuilder.PreparedStatementPart;
 
 import java.util.ArrayList;
 import java.util.List;

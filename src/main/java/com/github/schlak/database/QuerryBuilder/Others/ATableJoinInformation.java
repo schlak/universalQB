@@ -1,6 +1,6 @@
-package com.schlak.Database.QuerryBuilder.Others;
+package com.github.schlak.database.QuerryBuilder.Others;
 
-import com.schlak.Database.DBJoinVariants;
+import com.github.schlak.database.DBJoinVariants;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,11 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder;
 
-import com.schlak.Database.QuerryBuilder.ADBCreateBuilder;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlCreateBox;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlColumnDefinition;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumnDefinition;
-import com.schlak.Database.QuerryBuilder.QueryBuildException;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.QuerryBuilder.ADBCreateBuilder;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlCreateBox;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlColumnDefinition;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumnDefinition;
+import com.github.schlak.database.QuerryBuilder.QueryBuildException;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 /**
  * Created by Jonas Schlak on 29.10.2016.

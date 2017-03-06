@@ -1,6 +1,6 @@
-package com.schlak.Database.QuerryBuilder.Others;
+package com.github.schlak.database.QuerryBuilder.Others;
 
-import com.schlak.Database.DBOrderByStrategy;
+import com.github.schlak.database.DBOrderByStrategy;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.

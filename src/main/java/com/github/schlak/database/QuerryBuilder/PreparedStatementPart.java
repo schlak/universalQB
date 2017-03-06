@@ -1,6 +1,6 @@
-package com.schlak.Database.QuerryBuilder;
+package com.github.schlak.database.QuerryBuilder;
 
-import com.schlak.Database.ConditionLinkType;
+import com.github.schlak.database.ConditionLinkType;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

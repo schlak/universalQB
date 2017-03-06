@@ -1,4 +1,4 @@
-package com.schlak.Database.QuerryBuilder.Interface;
+package com.github.schlak.database.QuerryBuilder.Interface;
 
 import java.sql.Connection;
 

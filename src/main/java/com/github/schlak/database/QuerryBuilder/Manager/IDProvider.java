@@ -1,18 +1,18 @@
-package com.schlak.Database.QuerryBuilder.Manager;
+package com.github.schlak.database.QuerryBuilder.Manager;
 
-import com.schlak.Database.DBConnectionPool;
-import com.schlak.Database.DBOrderByStrategy;
-import com.schlak.Database.DataType;
-import com.schlak.Database.QuerryBuilder.ADBCreateBuilder;
-import com.schlak.Database.QuerryBuilder.ADBInsertBuilder;
-import com.schlak.Database.QuerryBuilder.ADBSelectBuilder;
-import com.schlak.Database.QuerryBuilder.Interface.IDBQueryBuilder;
-import com.schlak.Database.QuerryBuilder.Interface.IGetConnection;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumn;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumnDefinition;
-import com.schlak.Database.QuerryBuilder.Others.AOrderByColumn;
-import com.schlak.Database.QuerryBuilder.Others.AValueAllocation;
-import com.schlak.Database.QuerryBuilder.QueryBuildException;
+import com.github.schlak.database.DBConnectionPool;
+import com.github.schlak.database.DBOrderByStrategy;
+import com.github.schlak.database.DataType;
+import com.github.schlak.database.QuerryBuilder.ADBCreateBuilder;
+import com.github.schlak.database.QuerryBuilder.ADBInsertBuilder;
+import com.github.schlak.database.QuerryBuilder.ADBSelectBuilder;
+import com.github.schlak.database.QuerryBuilder.Interface.IDBQueryBuilder;
+import com.github.schlak.database.QuerryBuilder.Interface.IGetConnection;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumn;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumnDefinition;
+import com.github.schlak.database.QuerryBuilder.Others.AOrderByColumn;
+import com.github.schlak.database.QuerryBuilder.Others.AValueAllocation;
+import com.github.schlak.database.QuerryBuilder.QueryBuildException;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

@@ -1,7 +1,8 @@
-package com.schlak.Database.QuerryBuilder.Interface;
+package com.github.schlak.database.QuerryBuilder.Interface;
 
-import com.schlak.Database.QuerryBuilder.QueryBuildException;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+
+import com.github.schlak.database.QuerryBuilder.QueryBuildException;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 /**
  * Created by jschl on 16.01.2017.

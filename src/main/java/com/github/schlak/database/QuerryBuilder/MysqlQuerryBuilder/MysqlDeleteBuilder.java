@@ -1,10 +1,10 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder;
 
-import com.schlak.Database.QuerryBuilder.ADBDeleteBuilder;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlDeleteBox;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
-import com.schlak.Database.QuerryBuilder.QueryBuildException;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.QuerryBuilder.ADBDeleteBuilder;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlDeleteBox;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
+import com.github.schlak.database.QuerryBuilder.QueryBuildException;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.

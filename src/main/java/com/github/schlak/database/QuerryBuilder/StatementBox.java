@@ -1,4 +1,4 @@
-package com.schlak.Database.QuerryBuilder;
+package com.github.schlak.database.QuerryBuilder;
 
 
 import java.sql.Connection;
@@ -67,7 +67,7 @@ public abstract class StatementBox {
 
     /**
      * The type that is returned is used to identify the type of statement box like
-     * in the {@link com.schlak.Database.QuerryBuilder.Manager.QueryManager} class.
+     * in the {@link com.github.schlak.database.QuerryBuilder.Manager.QueryManager} class.
      * The method will return its on class.
      *
      *

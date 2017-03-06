@@ -1,7 +1,7 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement;
 
-import com.schlak.Database.QuerryBuilder.Others.ADBColumnDefinition;
-import com.schlak.Database.QuerryBuilder.Statement.CreateBox;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumnDefinition;
+import com.github.schlak.database.QuerryBuilder.Statement.CreateBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

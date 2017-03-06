@@ -1,14 +1,14 @@
-package com.schlak.Database.QuerryBuilder.Manager;
+package com.github.schlak.database.QuerryBuilder.Manager;
 
-import com.schlak.Database.DBConnectionPool;
-import com.schlak.Database.Debug;
-import com.schlak.Database.QuerryBuilder.Interface.IGetConnection;
-import com.schlak.Database.QuerryBuilder.SQLAppendException;
-import com.schlak.Database.QuerryBuilder.Statement.CreateBox;
-import com.schlak.Database.QuerryBuilder.Statement.DeleteBox;
-import com.schlak.Database.QuerryBuilder.Statement.InsertBox;
-import com.schlak.Database.QuerryBuilder.Statement.UpdateBox;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.DBConnectionPool;
+import com.github.schlak.database.Debug;
+import com.github.schlak.database.QuerryBuilder.Interface.IGetConnection;
+import com.github.schlak.database.QuerryBuilder.SQLAppendException;
+import com.github.schlak.database.QuerryBuilder.Statement.CreateBox;
+import com.github.schlak.database.QuerryBuilder.Statement.DeleteBox;
+import com.github.schlak.database.QuerryBuilder.Statement.InsertBox;
+import com.github.schlak.database.QuerryBuilder.Statement.UpdateBox;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 import java.sql.*;
 import java.util.ArrayDeque;

@@ -1,7 +1,7 @@
-package com.schlak.Database.QuerryBuilder;
+package com.github.schlak.database.QuerryBuilder;
 
-import com.schlak.Database.QuerryBuilder.Interface.IQuery;
-import com.schlak.Database.QuerryBuilder.Others.*;
+import com.github.schlak.database.QuerryBuilder.Interface.IQuery;
+import com.github.schlak.database.QuerryBuilder.Others.*;
 
 import java.util.ArrayList;
 import java.util.List;

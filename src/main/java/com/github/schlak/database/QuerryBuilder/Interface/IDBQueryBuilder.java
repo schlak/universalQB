@@ -1,8 +1,8 @@
-package com.schlak.Database.QuerryBuilder.Interface;
+package com.github.schlak.database.QuerryBuilder.Interface;
 
-import com.schlak.Database.QuerryBuilder.*;
-import com.schlak.Database.QuerryBuilder.Manager.IDProvider;
-import com.schlak.Database.QuerryBuilder.Others.*;
+import com.github.schlak.database.QuerryBuilder.*;
+import com.github.schlak.database.QuerryBuilder.Manager.IDProvider;
+import com.github.schlak.database.QuerryBuilder.Others.*;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.

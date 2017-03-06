@@ -1,4 +1,4 @@
-package com.schlak.Database.QuerryBuilder;
+package com.github.schlak.database.QuerryBuilder;
 
 /**
  * Created by joans on 24.01.17.

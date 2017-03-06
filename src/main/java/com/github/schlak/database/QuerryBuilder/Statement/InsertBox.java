@@ -1,8 +1,8 @@
-package com.schlak.Database.QuerryBuilder.Statement;
+package com.github.schlak.database.QuerryBuilder.Statement;
 
-import com.schlak.Database.QuerryBuilder.Others.AValueAllocation;
-import com.schlak.Database.QuerryBuilder.SQLAppendException;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.QuerryBuilder.Others.AValueAllocation;
+import com.github.schlak.database.QuerryBuilder.SQLAppendException;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 import java.util.ArrayList;
 import java.util.List;

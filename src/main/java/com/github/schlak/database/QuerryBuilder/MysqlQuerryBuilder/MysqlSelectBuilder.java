@@ -1,14 +1,14 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder;
 
-import com.schlak.Database.Debug;
-import com.schlak.Database.QuerryBuilder.ADBSelectBuilder;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlSelectBox;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumn;
-import com.schlak.Database.QuerryBuilder.Others.AOrderByColumn;
-import com.schlak.Database.QuerryBuilder.Others.ATableJoinInformation;
-import com.schlak.Database.QuerryBuilder.QueryBuildException;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.Debug;
+import com.github.schlak.database.QuerryBuilder.ADBSelectBuilder;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlSelectBox;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumn;
+import com.github.schlak.database.QuerryBuilder.Others.AOrderByColumn;
+import com.github.schlak.database.QuerryBuilder.Others.ATableJoinInformation;
+import com.github.schlak.database.QuerryBuilder.QueryBuildException;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
@@ -158,7 +158,7 @@ public class MysqlSelectBuilder extends ADBSelectBuilder {
 
     /**
      * The {@link MysqlSelectBox} is the representation of the Statement in a form that you can't change the statement anymore.
-     * This format is the only one, that is excepted by the {@link com.schlak.Database.QuerryBuilder.Manager.QueryManager}
+     * This format is the only one, that is excepted by the {@link com.github.schlak.database.QuerryBuilder.Manager.QueryManager}
      * to execute a query or to be able to get a prepared statement.
      *
      * @return the {@link MysqlSelectBox}

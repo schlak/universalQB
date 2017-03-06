@@ -1,9 +1,12 @@
-package com.schlak.Database.Connector;
+package com.github.schlak.database.Connector;
 
-import com.schlak.Database.DBConnectionPool;
-import com.schlak.Database.QuerryBuilder.Interface.IDBQueryBuilder;
-import com.schlak.Database.QuerryBuilder.Manager.IDProvider;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlQueryBuilder;
+
+
+import com.github.schlak.database.DBConnectionPool;
+import com.github.schlak.database.QuerryBuilder.Interface.IDBQueryBuilder;
+import com.github.schlak.database.QuerryBuilder.Manager.IDProvider;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlQueryBuilder;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -108,6 +111,7 @@ public class MySQLConnector extends AConnector implements IConnector {
         return new MysqlQueryBuilder(connectionPool, this::getIdProvider);
     }
 
+    @NotNull
     public IDProvider getIdProvider() {
         if (this.idProvider == null)
             this.idProvider = new IDProvider(this::getConnection);

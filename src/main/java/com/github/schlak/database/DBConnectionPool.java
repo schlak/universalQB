@@ -1,7 +1,9 @@
-package com.schlak.Database;
+package com.github.schlak.database;
 
-import com.schlak.Database.Connector.IConnector;
-import com.schlak.Database.QuerryBuilder.Interface.IDBQueryBuilder;
+
+
+import com.github.schlak.database.Connector.IConnector;
+import com.github.schlak.database.QuerryBuilder.Interface.IDBQueryBuilder;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -42,8 +44,8 @@ public class DBConnectionPool {
      * The initialisation of the connection pool takes place in here.
      * Also the query builder got referenced because the builder depends on the
      * database and thus on the {@link IConnector} which is database specific. #
-     * For example the {@link com.schlak.Database.Connector.MySQLConnector} will return an iModelCallback of the
-     * {@link com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlQueryBuilder}.
+     * For example the {@link com.github.schlak.database.Connector.MySQLConnector} will return an iModelCallback of the
+     * {@link com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlQueryBuilder}.
      *
      * @param connector ,{@link IConnector} is used to get the connections from the database
      */

@@ -1,7 +1,7 @@
-package com.schlak.Database.QuerryBuilder.Statement;
+package com.github.schlak.database.QuerryBuilder.Statement;
 
-import com.schlak.Database.QuerryBuilder.Others.ADBColumnDefinition;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumnDefinition;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 import java.util.List;
 

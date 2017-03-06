@@ -1,8 +1,8 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others;
 
-import com.schlak.Database.DataType;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumn;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumnDefinition;
+import com.github.schlak.database.DataType;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumn;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumnDefinition;
 
 /**
  * Created by Jonas Schlak on 26.10.2016.

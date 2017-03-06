@@ -1,9 +1,9 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others;
 
-import com.schlak.Database.ConditionLinkType;
-import com.schlak.Database.QuerryBuilder.PreparedStatementPart;
-import com.schlak.Database.QuerryBuilder.Others.AConditionStack;
-import com.schlak.Database.QuerryBuilder.Others.AValueAllocation;
+import com.github.schlak.database.ConditionLinkType;
+import com.github.schlak.database.QuerryBuilder.PreparedStatementPart;
+import com.github.schlak.database.QuerryBuilder.Others.AConditionStack;
+import com.github.schlak.database.QuerryBuilder.Others.AValueAllocation;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.

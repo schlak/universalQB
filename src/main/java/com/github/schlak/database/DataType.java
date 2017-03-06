@@ -1,4 +1,4 @@
-package com.schlak.Database;
+package com.github.schlak.database;
 
 /**
  * Created by Jonas Schlak on 26.10.2016.

@@ -1,12 +1,12 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder;
 
-import com.schlak.Database.DBConnectionPool;
-import com.schlak.Database.QuerryBuilder.*;
-import com.schlak.Database.QuerryBuilder.Interface.IDBQueryBuilder;
-import com.schlak.Database.QuerryBuilder.Interface.IDProviderCallback;
-import com.schlak.Database.QuerryBuilder.Manager.IDProvider;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others.*;
-import com.schlak.Database.QuerryBuilder.Others.*;
+import com.github.schlak.database.DBConnectionPool;
+import com.github.schlak.database.QuerryBuilder.*;
+import com.github.schlak.database.QuerryBuilder.Interface.IDBQueryBuilder;
+import com.github.schlak.database.QuerryBuilder.Interface.IDProviderCallback;
+import com.github.schlak.database.QuerryBuilder.Manager.IDProvider;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.*;
+import com.github.schlak.database.QuerryBuilder.Others.*;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.

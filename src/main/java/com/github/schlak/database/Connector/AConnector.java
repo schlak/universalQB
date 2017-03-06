@@ -1,4 +1,4 @@
-package com.schlak.Database.Connector;
+package com.github.schlak.database.Connector;
 
 import java.util.HashMap;
 

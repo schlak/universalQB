@@ -1,8 +1,8 @@
-package com.schlak.Database.QuerryBuilder;
+package com.github.schlak.database.QuerryBuilder;
 
-import com.schlak.Database.QuerryBuilder.Interface.IQuery;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumnDefinition;
-import com.schlak.Database.QuerryBuilder.Others.AValueAllocation;
+import com.github.schlak.database.QuerryBuilder.Interface.IQuery;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumnDefinition;
+import com.github.schlak.database.QuerryBuilder.Others.AValueAllocation;
 
 import java.util.ArrayList;
 import java.util.List;

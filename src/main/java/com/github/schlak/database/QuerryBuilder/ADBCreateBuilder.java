@@ -1,7 +1,7 @@
-package com.schlak.Database.QuerryBuilder;
+package com.github.schlak.database.QuerryBuilder;
 
-import com.schlak.Database.QuerryBuilder.Interface.IQuery;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumnDefinition;
+import com.github.schlak.database.QuerryBuilder.Interface.IQuery;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumnDefinition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public abstract class ADBCreateBuilder implements IQuery {
      * <p>
      * The method is used to add an {@link ADBColumnDefinition column definition} to the {@link ADBCreateBuilder create builder}
      * which represents a column that will be created in the new table. The {@link ADBColumnDefinition column definition}
-     * contains the name definition as well as the {@link com.schlak.Database.DataType data type} the column will
+     * contains the name definition as well as the {@link com.github.schlak.database.DataType data type} the column will
      * store.
      *
      * @param columnDefinition that should be add to the {@link ADBCreateBuilder}
@@ -54,7 +54,7 @@ public abstract class ADBCreateBuilder implements IQuery {
      * <p>
      * These method have to be implemented in the inheriting class to make sure that the right
      * column definition is used. This is necessary because the procedure of how a column is defined
-     * is implemented in the column definition class like the {@link com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlColumnDefinition MySQL column definition}
+     * is implemented in the column definition class like the {@link com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlColumnDefinition MySQL column definition}
      * and varies from database implementation to database implementation.
      *
      * @return a new instance of the {@link ADBColumnDefinition column definition} class

@@ -1,9 +1,9 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder;
 
-import com.schlak.Database.QuerryBuilder.ADBInsertBuilder;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlInsertBox;
-import com.schlak.Database.QuerryBuilder.QueryBuildException;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.QuerryBuilder.ADBInsertBuilder;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlInsertBox;
+import com.github.schlak.database.QuerryBuilder.QueryBuildException;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.

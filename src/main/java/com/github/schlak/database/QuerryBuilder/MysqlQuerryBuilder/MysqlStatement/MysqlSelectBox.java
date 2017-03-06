@@ -1,7 +1,7 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement;
 
-import com.schlak.Database.QuerryBuilder.Others.AConditionStack;
-import com.schlak.Database.QuerryBuilder.Statement.SelectBox;
+import com.github.schlak.database.QuerryBuilder.Others.AConditionStack;
+import com.github.schlak.database.QuerryBuilder.Statement.SelectBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

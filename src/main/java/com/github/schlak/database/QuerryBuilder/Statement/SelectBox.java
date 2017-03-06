@@ -1,7 +1,7 @@
-package com.schlak.Database.QuerryBuilder.Statement;
+package com.github.schlak.database.QuerryBuilder.Statement;
 
-import com.schlak.Database.QuerryBuilder.Others.AConditionStack;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.QuerryBuilder.Others.AConditionStack;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 /**
  * Created by Jonas Schlak on 24.01.17.

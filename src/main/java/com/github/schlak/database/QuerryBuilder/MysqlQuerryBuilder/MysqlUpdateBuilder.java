@@ -1,10 +1,10 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder;
 
-import com.schlak.Database.QuerryBuilder.ADBUpdateBuilder;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlUpdateBox;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
-import com.schlak.Database.QuerryBuilder.QueryBuildException;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.QuerryBuilder.ADBUpdateBuilder;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement.MysqlUpdateBox;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
+import com.github.schlak.database.QuerryBuilder.QueryBuildException;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
@@ -30,7 +30,7 @@ public class MysqlUpdateBuilder extends ADBUpdateBuilder {
 
     /**
      * The {@link MysqlUpdateBox} is the representation of the Statement in a form that you can't change the statement anymore.
-     * This format is the only one, that is excepted by the {@link com.schlak.Database.QuerryBuilder.Manager.QueryManager}
+     * This format is the only one, that is excepted by the {@link com.github.schlak.database.QuerryBuilder.Manager.QueryManager}
      * to execute a query or to be able to get a prepared statement.
      *
      * @return the {@link MysqlUpdateBox}

@@ -1,13 +1,13 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlStatement;
 
 
-import com.schlak.Database.ConditionLinkType;
-import com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
-import com.schlak.Database.QuerryBuilder.Others.AConditionStack;
-import com.schlak.Database.QuerryBuilder.PreparedStatementPart;
-import com.schlak.Database.QuerryBuilder.SQLAppendException;
-import com.schlak.Database.QuerryBuilder.Statement.DeleteBox;
-import com.schlak.Database.QuerryBuilder.StatementBox;
+import com.github.schlak.database.ConditionLinkType;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlConditionStack;
+import com.github.schlak.database.QuerryBuilder.Others.AConditionStack;
+import com.github.schlak.database.QuerryBuilder.PreparedStatementPart;
+import com.github.schlak.database.QuerryBuilder.SQLAppendException;
+import com.github.schlak.database.QuerryBuilder.Statement.DeleteBox;
+import com.github.schlak.database.QuerryBuilder.StatementBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

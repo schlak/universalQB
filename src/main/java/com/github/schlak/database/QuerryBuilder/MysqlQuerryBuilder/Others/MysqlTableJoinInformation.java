@@ -1,9 +1,10 @@
-package com.schlak.Database.QuerryBuilder.MysqlQuerryBuilder.Others;
+package com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others;
 
-import com.schlak.Database.DBJoinVariants;
-import com.schlak.Database.QuerryBuilder.Others.ADBColumn;
-import com.schlak.Database.QuerryBuilder.Others.AJoinCondition;
-import com.schlak.Database.QuerryBuilder.Others.ATableJoinInformation;
+import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.Others.MysqlJoinCondition;
+import com.github.schlak.database.DBJoinVariants;
+import com.github.schlak.database.QuerryBuilder.Others.ADBColumn;
+import com.github.schlak.database.QuerryBuilder.Others.AJoinCondition;
+import com.github.schlak.database.QuerryBuilder.Others.ATableJoinInformation;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
