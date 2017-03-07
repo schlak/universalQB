@@ -1,7 +1,7 @@
 package com.github.schlak.database.Connector;
 
 import com.github.schlak.database.DBConnectionPool;
-import com.github.schlak.database.QuerryBuilder.Interface.IDBQueryBuilder;
+import com.github.schlak.database.QueryBuilder.Interface.IDBQueryBuilder;
 
 import java.sql.Connection;
 

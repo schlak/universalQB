@@ -3,9 +3,9 @@ package com.github.schlak.database.Connector;
 
 
 import com.github.schlak.database.DBConnectionPool;
-import com.github.schlak.database.QuerryBuilder.Interface.IDBQueryBuilder;
-import com.github.schlak.database.QuerryBuilder.Manager.IDProvider;
-import com.github.schlak.database.QuerryBuilder.MysqlQuerryBuilder.MysqlQueryBuilder;
+import com.github.schlak.database.QueryBuilder.Interface.IDBQueryBuilder;
+import com.github.schlak.database.QueryBuilder.Manager.IDProvider;
+import com.github.schlak.database.QueryBuilder.MysqlQueryBuilder.MysqlQueryBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
