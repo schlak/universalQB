@@ -3,6 +3,7 @@ package com.github.schlak.database;
 
 
 import com.github.schlak.database.Connector.IConnector;
+import com.github.schlak.database.Implementation.MySQL.StatementBuilder.MysqlQueryBuilder;
 import com.github.schlak.database.QueryBuilder.Interface.IDBQueryBuilder;
 
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.Stack;
  * Created by Jonas Schlak on 12.10.2016.
  * <p>
  * The {@link DBConnectionPool} the class, that manages the connection pools and is able to
- * handel a pool with multiple connections. Also the database type can change from pool to pool.
+ * handel a pool with multiple connections. Also the database type can change setTable pool to pool.
  * The database type differs on the {@link IConnector} that is passed by creating a new connection pool.
  */
 public class DBConnectionPool {
@@ -45,9 +46,9 @@ public class DBConnectionPool {
      * Also the query builder got referenced because the builder depends on the
      * database and thus on the {@link IConnector} which is database specific. #
      * For example the {@link com.github.schlak.database.Connector.MySQLConnector} will return an iModelCallback of the
-     * {@link com.github.schlak.database.QueryBuilder.MysqlQueryBuilder.MysqlQueryBuilder}.
+     * {@link MysqlQueryBuilder}.
      *
-     * @param connector ,{@link IConnector} is used to get the connections from the database
+     * @param connector ,{@link IConnector} is used to get the connections setTable the database
      */
     private DBConnectionPool(IConnector connector) {
         this.connector = connector;
@@ -161,7 +162,7 @@ public class DBConnectionPool {
 
 
     /**
-     * The method refills the internal connection list with new connections from
+     * The method refills the internal connection list with new connections setTable
      * the getConnection method of the connector.
      */
     private void refillConnections() {

@@ -1,8 +1,8 @@
 package com.github.schlak.database.QueryBuilder.Interface;
 
-import com.github.schlak.database.QueryBuilder.*;
-import com.github.schlak.database.QueryBuilder.Manager.IDProvider;
-import com.github.schlak.database.QueryBuilder.Others.*;
+import com.github.schlak.database.Definition.GeneralObjects.*;
+import com.github.schlak.database.Definition.Statements.*;
+import com.github.schlak.database.Manager.IDProvider;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
@@ -10,81 +10,81 @@ import com.github.schlak.database.QueryBuilder.Others.*;
 public interface IDBQueryBuilder {
 
     /**
-     * Returns a new {@link ADBSelectBuilder}.
+     * Returns a new {@link BasicSelect}.
      *
-     * @return the {@link ADBSelectBuilder}
+     * @return the {@link BasicSelect}
      */
-    ADBSelectBuilder getSelectBuilder();
+    BasicSelect getSelectBuilder();
 
     /**
-     * Returns a new {@link ADBUpdateBuilder}.
+     * Returns a new {@link BasicUpdate}.
      *
-     * @return the {@link ADBUpdateBuilder}
+     * @return the {@link BasicUpdate}
      */
-    ADBUpdateBuilder getUpdateBuilder();
+    BasicUpdate getUpdateBuilder();
 
     /**
-     * Returns a new {@link ADBInsertBuilder}.
+     * Returns a new {@link BasicInsert}.
      *
-     * @return the {@link ADBInsertBuilder}
+     * @return the {@link BasicInsert}
      */
-    ADBInsertBuilder getInsertBuilder();
+    BasicInsert getInsertBuilder();
 
     /**
-     * Returns a new {@link ADBDeleteBuilder}.
+     * Returns a new {@link BasicDelete}.
      *
-     * @return the {@link ADBDeleteBuilder}
+     * @return the {@link BasicDelete}
      */
-    ADBDeleteBuilder getDeleteBuilder();
+    BasicDelete getDeleteBuilder();
 
     /**
-     * Returns a new {@link ADBCreateBuilder}.
+     * Returns a new {@link BasicCreate}.
      *
-     * @return the {@link ADBCreateBuilder}
+     * @return the {@link BasicCreate}
      */
-    ADBCreateBuilder getCreateBuilder();
+    BasicCreate getCreateBuilder();
 
     /**
-     * Returns a new {@link AConditionStack}.
+     * Returns a new {@link ConditionStack}.
      *
-     * @return the new {@link AConditionStack}
+     * @return the new {@link ConditionStack}
      */
-    AConditionStack getNewConditionStackInstance();
+    ConditionStack getNewConditionStackInstance();
 
     /**
      * Returns a new db column instance.
      *
-     * @return the new {@link ADBColumn}
+     * @return the new {@link Column}
      */
-    ADBColumn getNewDBColumnInstance();
+    Column getNewDBColumnInstance();
 
     /**
-     * Returns a new {@link AJoinCondition}.
+     * Returns a new {@link JoinCondition}.
      *
-     * @return the new {@link AJoinCondition}
+     * @return the new {@link JoinCondition}
      */
-    AJoinCondition getNewJoinConditionInstance();
+    JoinCondition getNewJoinConditionInstance();
 
     /**
-     * Returns a new {@link AOrderByColumn}.
+     * Returns a new {@link OrderByDefinition}.
      *
-     * @return the new {@link AOrderByColumn}
+     * @return the new {@link OrderByDefinition}
      */
-    AOrderByColumn getNewOrderByColumnInstance();
+    OrderByDefinition getNewOrderByColumnInstance();
 
     /**
-     * Returns a new {@link ATableJoinInformation}.
+     * Returns a new {@link TableJoinInformation}.
      *
-     * @return the new {@link ATableJoinInformation}
+     * @return the new {@link TableJoinInformation}
      */
-    ATableJoinInformation getNewTableJoinInformationInstance();
+    TableJoinInformation getNewTableJoinInformationInstance();
 
     /**
-     * Returns a new {@link AValueAllocation}.
+     * Returns a new {@link ValueAllocation}.
      *
      * @return the new value allocation instance
      */
-    AValueAllocation getNewValueAllocationInstance();
+    ValueAllocation getNewValueAllocationInstance();
 
     /**
      * Returns a new {@link IDProvider}.

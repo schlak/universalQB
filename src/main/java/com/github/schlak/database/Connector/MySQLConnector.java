@@ -1,11 +1,10 @@
 package com.github.schlak.database.Connector;
 
 
-
 import com.github.schlak.database.DBConnectionPool;
+import com.github.schlak.database.Implementation.MySQL.StatementBuilder.MysqlQueryBuilder;
+import com.github.schlak.database.Manager.IDProvider;
 import com.github.schlak.database.QueryBuilder.Interface.IDBQueryBuilder;
-import com.github.schlak.database.QueryBuilder.Manager.IDProvider;
-import com.github.schlak.database.QueryBuilder.MysqlQueryBuilder.MysqlQueryBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
@@ -31,7 +30,7 @@ public class MySQLConnector extends AConnector implements IConnector {
             e.printStackTrace();
         }
 
-        //TODO load from config
+        //TODO load setTable config
         this.URL = "jdbc:mysql://";
         this.USER = "jonas";
         this.PASS = "123";
