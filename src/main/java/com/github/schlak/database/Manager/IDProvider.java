@@ -120,7 +120,7 @@ public class IDProvider {
 
     private void reserveIDs(String tableName) {
 
-        int lastReservedID;
+        int lastReservedID = 0;
 
         ResultSet resultSet = null;
 
@@ -148,8 +148,6 @@ public class IDProvider {
         selectBuilder.setTable(TABLE_NAME);
         selectBuilder.column(idCountColumn);
         selectBuilder.where(tableValueAllocation);
-        selectBuilder.limit(1);
-        selectBuilder.orderBy(tableOrderByColumn);
 
         try {
             resultSet = selectBuilder.getStatementBox().getPreparedStatement(connection).executeQuery();
@@ -160,8 +158,11 @@ public class IDProvider {
         try {
             if (resultSet == null)
                 throw new SQLException();
-            resultSet.next();
-            lastReservedID = resultSet.getInt(1);
+            while (resultSet.next()) {
+                if (resultSet.getInt(1) > lastReservedID)
+                    lastReservedID = resultSet.getInt(1);
+            }
+
         } catch (SQLException e) {
             lastReservedID = 0;
         }

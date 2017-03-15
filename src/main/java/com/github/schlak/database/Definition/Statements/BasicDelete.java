@@ -3,12 +3,14 @@ package com.github.schlak.database.Definition.Statements;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
+import com.github.schlak.database.Definition.GeneralOperations.AddWhereClause;
+import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.IQuery;
 
 /**
  * Created by Jonas Schlak.
  */
-public abstract class BasicDelete implements IQuery {
+public abstract class BasicDelete implements SetTable, AddWhereClause, IQuery {
 
     /**
      * The column definition list is used to store all {@link ColumnDefinition column definitions}. These will be used
@@ -65,7 +67,7 @@ public abstract class BasicDelete implements IQuery {
      * @param tableName that will be set to the local variable {@link BasicDelete#table table name}
      * @return the {@link BasicDelete actual instance} for chaining the method calls
      */
-    public void from(String tableName) {
+    public void setTable(String tableName) {
         this.table = tableName;
     }
 }
