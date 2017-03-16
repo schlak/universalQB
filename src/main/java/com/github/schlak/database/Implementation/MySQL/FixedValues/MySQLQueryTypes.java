@@ -1,7 +1,7 @@
 package com.github.schlak.database.Implementation.MySQL.FixedValues;
 
 
-import com.github.schlak.database.Definition.FixedValues.QueryTypes;
+import com.github.schlak.database.Definition.FixedValues.BasicQueryTypes;
 
 /**
  * Created by jonas on 15.03.17.
@@ -11,9 +11,9 @@ public enum MySQLQueryTypes {
     CREATE, UPDATE, DELETE, INSERT;
 
 
-    public static MySQLQueryTypes get(QueryTypes queryTypes) {
-        if (queryTypes == null) throw new NullPointerException();
-        switch (queryTypes) {
+    public static MySQLQueryTypes get(BasicQueryTypes basicQueryTypes) {
+        if (basicQueryTypes == null) throw new NullPointerException();
+        switch (basicQueryTypes) {
             case CREATE:
                 return CREATE;
             case UPDATE:
