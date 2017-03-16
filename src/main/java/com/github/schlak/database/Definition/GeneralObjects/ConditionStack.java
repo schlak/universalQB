@@ -21,7 +21,7 @@ public abstract class ConditionStack {
     /**
      * The {@link ConditionLinkType} type.
      */
-    protected ConditionLinkType conditinonLinkType;
+    protected ConditionLinkType conditionLinkType;
 
     /**
      * Instantiates a new {@link ConditionStack}.
@@ -29,7 +29,7 @@ public abstract class ConditionStack {
     public ConditionStack() {
         this.conditionStackList = new ArrayList<>();
         this.valueConditionList = new ArrayList<>();
-        this.conditinonLinkType = ConditionLinkType.AND;
+        this.conditionLinkType = ConditionLinkType.AND;
     }
 
     /**
@@ -38,7 +38,10 @@ public abstract class ConditionStack {
      * @param valueCondition the {@link ValueAllocation}
      * @return the {@link ConditionStack}
      */
-    public abstract ConditionStack addCondition(ValueAllocation valueCondition);
+    public ConditionStack addCondition(ValueAllocation valueCondition) {
+        valueConditionList.add(valueCondition);
+        return this;
+    }
 
     /**
      * Add {@link ValueAllocation} to the {@link ConditionStack}.
@@ -46,7 +49,10 @@ public abstract class ConditionStack {
      * @param conditionStack the {@link ConditionStack}
      * @return the {@link ConditionStack}
      */
-    public abstract ConditionStack addCondition(ConditionStack conditionStack);
+    public ConditionStack addCondition(ConditionStack conditionStack) {
+        this.conditionStackList.add(conditionStack);
+        return this;
+    }
 
     /**
      * Set the {@link ConditionLinkType}.
@@ -54,7 +60,10 @@ public abstract class ConditionStack {
      * @param conditionLinkType the {@link ConditionLinkType}
      * @return the {@link ConditionLinkType}
      */
-    public abstract ConditionStack setConditionLinkType(ConditionLinkType conditionLinkType);
+    public ConditionStack setConditionLinkType(ConditionLinkType conditionLinkType) {
+        this.conditionLinkType = conditionLinkType;
+        return this;
+    }
 
     /**
      * Retruns the condition string.

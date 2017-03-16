@@ -19,7 +19,7 @@ public enum MSSQLDataType {
         this.value = value;
     }
 
-    public MSSQLDataType get(BasicDataType baseBaseDataType) {
+    public static MSSQLDataType get(BasicDataType baseBaseDataType) {
         switch (baseBaseDataType) {
             case REAL:
                 return FLOAT;

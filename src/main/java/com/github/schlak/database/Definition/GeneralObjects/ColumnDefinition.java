@@ -38,7 +38,10 @@ public abstract class ColumnDefinition {
      * @param column the column
      * @return the column
      */
-    public abstract ColumnDefinition setColumn(Column column);
+    public ColumnDefinition setColumn(Column column) {
+        this.column = column;
+        return this;
+    }
 
     /**
      * Set the {@link BasicDataType} of the column.

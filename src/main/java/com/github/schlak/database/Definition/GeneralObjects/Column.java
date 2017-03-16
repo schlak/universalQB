@@ -19,7 +19,9 @@ public abstract class Column {
      *
      * @return the column name
      */
-    public abstract String getColumnName();
+    public String getColumnName() {
+        return this.columnName;
+    }
 
     /**
      * Set the column name.
@@ -27,14 +29,19 @@ public abstract class Column {
      * @param columnName the column name
      * @return the column name
      */
-    public abstract Column setColumnName(String columnName);
+    public Column setColumnName(String columnName) {
+        this.columnName = columnName;
+        return this;
+    }
 
     /**
      * Get the table name.
      *
      * @return the table name
      */
-    public abstract String getTableName();
+    public String getTableName() {
+        return this.tableName;
+    }
 
     /**
      * Set the table name.
@@ -42,7 +49,10 @@ public abstract class Column {
      * @param tableName the table name
      * @return the table name
      */
-    public abstract Column setTableName(String tableName);
+    public Column setTableName(String tableName) {
+        this.tableName = tableName;
+        return this;
+    }
 
     /**
      * Get the column string.
@@ -50,9 +60,4 @@ public abstract class Column {
      * @return the column string
      */
     public abstract String getColumnString();
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

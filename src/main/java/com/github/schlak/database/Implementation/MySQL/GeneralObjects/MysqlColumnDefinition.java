@@ -24,14 +24,13 @@ public class MysqlColumnDefinition extends ColumnDefinition {
     }
 
     @Override
-    public ColumnDefinition setColumn(Column column) {
-        this.column = column;
+    public ColumnDefinition setType(BasicDataType basicDataType) {
+        this.type = MySQLDataType.get(basicDataType);
         return this;
     }
 
-    @Override
-    public ColumnDefinition setType(BasicDataType basicDataType) {
-        this.type = MySQLDataType.get(basicDataType);
+    public ColumnDefinition setType(MySQLDataType mySQLDataType) {
+        this.type = mySQLDataType;
         return this;
     }
 }

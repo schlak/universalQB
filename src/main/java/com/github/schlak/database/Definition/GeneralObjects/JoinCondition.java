@@ -38,7 +38,10 @@ public abstract class JoinCondition {
      * @param baseTableColumn the base {@link Column}
      * @return the base {@link Column}
      */
-    public abstract JoinCondition setBaseTableColumn(Column baseTableColumn);
+    public JoinCondition setBaseTableColumn(Column baseTableColumn) {
+        this.baseColumn = baseTableColumn;
+        return this;
+    }
 
     /**
      * Sets join {@link Column}.
@@ -46,21 +49,28 @@ public abstract class JoinCondition {
      * @param joinTableColumn the join {@link Column}
      * @return the join {@link Column}
      */
-    public abstract JoinCondition setJoinTableColumn(Column joinTableColumn);
+    public JoinCondition setJoinTableColumn(Column joinTableColumn) {
+        this.joinColumn = joinTableColumn;
+        return this;
+    }
 
     /**
      * Returns the base table name.
      *
      * @return the base table name
      */
-    public abstract String getBaseTableName();
+    public String getBaseTableName() {
+        return baseColumn.tableName;
+    }
 
     /**
      * Returns the join table name.
      *
      * @return the join table name
      */
-    public abstract String getJoinTableName();
+    public String getJoinTableName() {
+        return this.joinColumn.tableName;
+    }
 
     /**
      * Returns the join condition string.

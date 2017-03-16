@@ -11,7 +11,7 @@ public enum MSSQLQueryTypes {
     CREATE, UPDATE, DELETE, INSERT;
 
 
-    public MSSQLQueryTypes get(QueryTypes queryTypes) {
+    public static MSSQLQueryTypes get(QueryTypes queryTypes) {
         if (queryTypes == null) throw new NullPointerException();
         switch (queryTypes) {
             case CREATE:

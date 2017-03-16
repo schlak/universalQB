@@ -60,7 +60,21 @@ public abstract class TableJoinInformation {
      * @param joinTableColumn the join {@link Column}
      * @throws Exception the exception
      */
-    public abstract void addJoinCondition(Column baseTableColumn, Column joinTableColumn) throws Exception;
+    public void addJoinCondition(Column baseTableColumn, Column joinTableColumn) throws Exception {
+        if (this.tableToJoin.equals(joinTableColumn.getTableName()) || this.tableToJoin.equals(""))
+            this.tableToJoin = joinTableColumn.getTableName();
+        this.baseTable = baseTableColumn.getTableName();
+        if (this.baseTable.equals(baseTableColumn.getTableName()) || this.baseTable.equals(""))
+            this.baseTable = baseTableColumn.getTableName();
+        else throw new Exception("Illegal table exception");
+
+        JoinCondition joinCondition = this.getJoinConditionInstance();
+
+        joinCondition.setBaseTableColumn(baseTableColumn);
+        joinCondition.setJoinTableColumn(joinTableColumn);
+
+        this.joinCondition.add(joinCondition);
+    }
 
     /**
      * Add join condition.
@@ -68,7 +82,16 @@ public abstract class TableJoinInformation {
      * @param joinCondition the {@link JoinCondition}
      * @throws Exception the exception
      */
-    public abstract void addJoinCondition(JoinCondition joinCondition) throws Exception;
+    public void addJoinCondition(JoinCondition joinCondition) throws Exception {
+        if (joinCondition.getBaseTableName().equals(this.baseTable) || this.baseTable.equals(""))
+            this.baseTable = joinCondition.getBaseTableName();
+        else throw new Exception("Illegal table exception");
+        if (joinCondition.getJoinTableName().equals(this.tableToJoin) || this.tableToJoin.equals(""))
+            this.tableToJoin = joinCondition.getJoinTableName();
+        else throw new Exception("Illegal table exception");
+
+        this.joinCondition.add(joinCondition);
+    }
 
     /**
      * Gets join string.
@@ -76,4 +99,6 @@ public abstract class TableJoinInformation {
      * @return the join string
      */
     public abstract String getJoinString();
+
+    public abstract JoinCondition getJoinConditionInstance();
 }

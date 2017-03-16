@@ -11,7 +11,7 @@ public enum SQLiteQueryTypes {
     CREATE, UPDATE, DELETE, INSERT;
 
 
-    public SQLiteQueryTypes get(QueryTypes queryTypes) {
+    public static SQLiteQueryTypes get(QueryTypes queryTypes) {
         if (queryTypes == null) throw new NullPointerException();
         switch (queryTypes) {
             case CREATE:

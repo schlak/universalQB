@@ -11,7 +11,7 @@ public enum MySQLQueryTypes {
     CREATE, UPDATE, DELETE, INSERT;
 
 
-    public MySQLQueryTypes get(QueryTypes queryTypes) {
+    public static MySQLQueryTypes get(QueryTypes queryTypes) {
         if (queryTypes == null) throw new NullPointerException();
         switch (queryTypes) {
             case CREATE:

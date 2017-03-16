@@ -21,13 +21,6 @@ public abstract class ValueAllocation {
     }
 
     /**
-     * Returns a new {@link Column} instance.
-     *
-     * @return the {@link Column} instance
-     */
-    public abstract Column getColumnInstance();
-
-    /**
      * Returns the value.
      *
      * @return the value
@@ -42,7 +35,10 @@ public abstract class ValueAllocation {
      * @param value the value
      * @return the value
      */
-    public abstract ValueAllocation setValue(String value);
+    public ValueAllocation setValue(String value) {
+        this.value = value;
+        return this;
+    }
 
     /**
      * Get the column.
@@ -56,10 +52,30 @@ public abstract class ValueAllocation {
     /**
      * Set the {@link Column}.
      *
-     * @param dbColumn the {@link Column}
+     * @param column the {@link Column}
      * @return the {@link ValueAllocation}
      */
-    public abstract ValueAllocation setColumn(Column dbColumn);
+    public ValueAllocation setColumn(Column column) {
+        this.column = column;
+        return this;
+    }
+
+    public ValueAllocation setColumn(String table, String column) {
+        Column columnInstance = this.getColumnInstance();
+
+        columnInstance.setColumnName(column);
+        columnInstance.setTableName(table);
+
+        this.column = columnInstance;
+        return this;
+    }
+
+    /**
+     * Returns a new {@link Column} instance.
+     *
+     * @return the {@link Column} instance
+     */
+    public abstract Column getColumnInstance();
 
     /**
      * Get the allocation string.

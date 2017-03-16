@@ -20,7 +20,7 @@ public enum SQLightDataType {
         this.value = value;
     }
 
-    public SQLightDataType get(BasicDataType baseBaseDataType) {
+    public static SQLightDataType get(BasicDataType baseBaseDataType) {
         switch (baseBaseDataType) {
             case REAL:
                 return REAL;

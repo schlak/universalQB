@@ -22,32 +22,6 @@ public class MysqlTableJoinInformation extends TableJoinInformation {
     }
 
     @Override
-    public void addJoinCondition(Column baseTableColumn, Column joinTableColumn) throws Exception {
-
-
-        if (this.tableToJoin.equals(joinTableColumn.getTableName()) || this.tableToJoin.equals(""))
-            this.tableToJoin = joinTableColumn.getTableName();
-        this.baseTable = baseTableColumn.getTableName();
-        if (this.baseTable.equals(baseTableColumn.getTableName()) || this.baseTable.equals(""))
-            this.baseTable = baseTableColumn.getTableName();
-        else throw new Exception("Illegal table exception");
-
-        this.joinCondition.add(new MysqlJoinCondition(baseTableColumn, joinTableColumn));
-    }
-
-    @Override
-    public void addJoinCondition(JoinCondition joinCondition) throws Exception {
-        if (joinCondition.getBaseTableName().equals(this.baseTable) || this.baseTable.equals(""))
-            this.baseTable = joinCondition.getBaseTableName();
-        else throw new Exception("Illegal table exception");
-        if (joinCondition.getJoinTableName().equals(this.tableToJoin) || this.tableToJoin.equals(""))
-            this.tableToJoin = joinCondition.getJoinTableName();
-        else throw new Exception("Illegal table exception");
-
-        this.joinCondition.add(joinCondition);
-    }
-
-    @Override
     public String getJoinString() {
         String conditions = "";
         Boolean isFirst = true;
@@ -59,6 +33,11 @@ public class MysqlTableJoinInformation extends TableJoinInformation {
         }
 
         return this.getJoinType() + " " + tableToJoin + " ON " + conditions;
+    }
+
+    @Override
+    public JoinCondition getJoinConditionInstance() {
+        return new MysqlJoinCondition();
     }
 
     @Override

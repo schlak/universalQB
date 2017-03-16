@@ -17,27 +17,8 @@ public class MysqlValueAllocation extends ValueAllocation {
     }
 
     @Override
-    public ValueAllocation setColumn(Column dbColumn) {
-        this.column = dbColumn;
-        return this;
-    }
-
-
-    public ValueAllocation setColumn(String table, String column) {
-        this.column = new MysqlColumn().setTableName(table).setColumnName(column);
-        return this;
-    }
-
-
-    @Override
     public Column getColumnInstance() {
         return new MysqlColumn();
-    }
-
-    @Override
-    public ValueAllocation setValue(String value) {
-        this.value = value;
-        return this;
     }
 
     @Override
@@ -45,6 +26,7 @@ public class MysqlValueAllocation extends ValueAllocation {
         return this.column.getColumnString() + "=" + this.value;
     }
 
+    @Deprecated
     public String toString() {
         return this.column.getColumnString() + "='" + this.value + "'";
     }
