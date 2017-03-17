@@ -1,22 +1,21 @@
 package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
 
-import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
-import com.github.schlak.database.Definition.Statements.BasicDelete;
+import com.github.schlak.database.Definition.Statements.BasicDeleteBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
-import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MysqlConditionStack;
+import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlDeleteBox;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlDelete extends BasicDelete {
+public class MySQLDeleteBuilder extends BasicDeleteBuilder {
 
     /**
-     * Instantiates a new {@link MysqlDelete}.
+     * Instantiates a new {@link MySQLDeleteBuilder}.
      */
-    public MysqlDelete() {
+    public MySQLDeleteBuilder() {
         super();
-        this.whereConditionStack = new MysqlConditionStack();
+        this.whereConditionStack = new MySQLConditionStack();
     }
 
 
@@ -28,7 +27,7 @@ public class MysqlDelete extends BasicDelete {
 
 
     @Override
-    public StatementBox getStatementBox() throws QueryBuildException {
+    public MysqlDeleteBox getStatementBox() throws QueryBuildException {
         validate();
         return new MysqlDeleteBox(table, whereConditionStack);
     }

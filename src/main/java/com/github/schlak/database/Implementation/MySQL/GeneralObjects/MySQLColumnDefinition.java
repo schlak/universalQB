@@ -8,7 +8,7 @@ import com.github.schlak.database.Implementation.MySQL.FixedValues.MySQLDataType
 /**
  * Created by Jonas Schlak on 26.10.2016.
  */
-public class MysqlColumnDefinition extends ColumnDefinition {
+public class MySQLColumnDefinition extends ColumnDefinition {
 
     private MySQLDataType type;
 

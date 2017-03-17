@@ -6,19 +6,19 @@ import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlValueAllocation extends ValueAllocation {
+public class MySQLValueAllocation extends ValueAllocation {
 
-    public MysqlValueAllocation() {
+    public MySQLValueAllocation() {
     }
 
-    public MysqlValueAllocation(String table, String column, String value) {
-        this.column = new MysqlColumn().setColumnName(column).setTableName(table);
+    public MySQLValueAllocation(String table, String column, String value) {
+        this.column = new MySQLColumn().setColumnName(column).setTableName(table);
         this.value = value;
     }
 
     @Override
     public Column getColumnInstance() {
-        return new MysqlColumn();
+        return new MySQLColumn();
     }
 
     @Override

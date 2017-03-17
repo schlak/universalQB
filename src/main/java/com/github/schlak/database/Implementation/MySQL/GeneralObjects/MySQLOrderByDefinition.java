@@ -7,7 +7,7 @@ import com.github.schlak.database.Definition.GeneralObjects.OrderByDefinition;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlOrderByDefinition extends OrderByDefinition {
+public class MySQLOrderByDefinition extends OrderByDefinition {
     @Override
     public OrderByDefinition setColumn(Column iDBColumn) {
         this.column = iDBColumn;

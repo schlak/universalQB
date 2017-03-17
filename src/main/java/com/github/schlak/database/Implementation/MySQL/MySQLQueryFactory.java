@@ -1,89 +1,86 @@
-package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
+package com.github.schlak.database.Implementation.MySQL;
 
-import com.github.schlak.database.DBConnectionPool;
 import com.github.schlak.database.Definition.GeneralObjects.*;
 import com.github.schlak.database.Definition.Statements.*;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.*;
+import com.github.schlak.database.Implementation.MySQL.StatementBuilder.*;
 import com.github.schlak.database.Manager.IDProvider;
-import com.github.schlak.database.QueryBuilder.Interface.IDBQueryBuilder;
 import com.github.schlak.database.QueryBuilder.Interface.IDProviderCallback;
+import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlQueryBuilder implements IDBQueryBuilder {
+public class MySQLQueryFactory implements QueryFactory {
 
     /**
      * The Connection pool.
      */
-    DBConnectionPool connectionPool;
     private IDProvider idProvider = null;
     private IDProviderCallback idProviderCallback;
 
     /**
-     * Instantiates a new {@link MysqlQueryBuilder}.
+     * Instantiates a new {@link MySQLQueryFactory}.
      *
-     * @param connectionPool     the connection pool
      * @param idProviderCallback the id provider callback
      */
-    public MysqlQueryBuilder(DBConnectionPool connectionPool, IDProviderCallback idProviderCallback) {
+    public MySQLQueryFactory(IDProviderCallback idProviderCallback) {
         this.idProviderCallback = idProviderCallback;
-        this.connectionPool = connectionPool;
     }
 
     @Override
-    public BasicSelect getSelectBuilder() {
-        return new MysqlSelect();
+    public BasicSelectBuilder getSelectBuilder() {
+        return new MySQLSelectBuilder();
     }
 
     @Override
-    public BasicUpdate getUpdateBuilder() {
-        return new MysqlUpdate();
+    public BasicUpdateBuilder getUpdateBuilder() {
+        return new MySQLUpdateBuilder();
     }
 
     @Override
-    public BasicInsert getInsertBuilder() {
-        return new MysqlInsert();
+    public BasicInsertBuilder getInsertBuilder() {
+        return new MySQLInsertBuilder();
     }
 
     @Override
-    public BasicDelete getDeleteBuilder() {
-        return new MysqlDelete();
+    public BasicDeleteBuilder getDeleteBuilder() {
+        return new MySQLDeleteBuilder();
+    }
+
+    @Override
+    public BasicCreateBuilder getCreateBuilder() {
+        return new MySQLCreateBuilder();
     }
 
     @Override
     public ConditionStack getNewConditionStackInstance() {
-        return new MysqlConditionStack();
+        return new MySQLConditionStack();
     }
 
     @Override
     public Column getNewDBColumnInstance() {
-        return new MysqlColumn();
+        return new MySQLColumn();
     }
 
     @Override
     public JoinCondition getNewJoinConditionInstance() {
-        return new MysqlJoinCondition();
+        return new MySQLJoinCondition();
     }
 
     @Override
     public OrderByDefinition getNewOrderByColumnInstance() {
-        return new MysqlOrderByDefinition();
+        return new MySQLOrderByDefinition();
     }
 
     @Override
     public TableJoinInformation getNewTableJoinInformationInstance() {
-        return new MysqlTableJoinInformation();
+        return new MySQLTableJoinInformation();
     }
 
     @Override
     public ValueAllocation getNewValueAllocationInstance() {
-        return new MysqlValueAllocation();
-    }
-
-    @Override
-    public BasicCreate getCreateBuilder() {
-        return new MysqlCreate();
+        return new MySQLValueAllocation();
     }
 
     @Override

@@ -6,13 +6,13 @@ import com.github.schlak.database.Definition.GeneralObjects.JoinCondition;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlJoinCondition extends JoinCondition {
+public class MySQLJoinCondition extends JoinCondition {
 
-    public MysqlJoinCondition(Column baseTableColumn, Column joinTableColumn) {
+    public MySQLJoinCondition(Column baseTableColumn, Column joinTableColumn) {
         super(baseTableColumn, joinTableColumn);
     }
 
-    public MysqlJoinCondition() {
+    public MySQLJoinCondition() {
         super();
     }
 

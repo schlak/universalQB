@@ -7,7 +7,7 @@ import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlConditionStack extends ConditionStack {
+public class MySQLConditionStack extends ConditionStack {
 
     @Override
     public String getConditionString() {

@@ -1,18 +1,17 @@
 package com.github.schlak.database.Manager;
 
-import com.github.schlak.database.DBConnectionPool;
+import com.github.schlak.database.ConnectionPool;
 import com.github.schlak.database.Definition.FixedValues.BasicDataType;
 import com.github.schlak.database.Definition.FixedValues.DBOrderByStrategy;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.OrderByDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
-import com.github.schlak.database.Definition.Statements.BasicCreate;
-import com.github.schlak.database.Definition.Statements.BasicInsert;
-import com.github.schlak.database.Definition.Statements.BasicSelect;
+import com.github.schlak.database.Definition.Statements.BasicCreateBuilder;
+import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
+import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
-import com.github.schlak.database.QueryBuilder.Interface.IDBQueryBuilder;
-import com.github.schlak.database.QueryBuilder.Interface.IGetConnection;
+import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -33,12 +32,16 @@ public class IDProvider {
     private static String INSTANCE_COLUMN_NAME = "instance";
 
     private static int TO_RESERVE = 20;
+
     private String instanceIdentifier;
     private HashMap<String, Stack<Integer>> idHashMap = new HashMap<>();
-    private IGetConnection connector;
 
-    public IDProvider(IGetConnection connector) {
-        this.connector = connector;
+    private ConnectionPool connectionPool;
+
+
+    public IDProvider(String connectionPoolIdentifier) {
+
+        this.connectionPool = ConnectionPool.getInstance(connectionPoolIdentifier);
 
         String hostname;
         try {
@@ -58,8 +61,8 @@ public class IDProvider {
     }
 
     private void createTable() {
-        IDBQueryBuilder queryBuilder = DBConnectionPool.getDefaultInstance().getQueryBuilder();
-        BasicCreate createBuilder = queryBuilder.getCreateBuilder();
+        QueryFactory queryBuilder = connectionPool.getQueryFactory();
+        BasicCreateBuilder createBuilder = queryBuilder.getCreateBuilder();
 
         Column tableColumn = queryBuilder.getNewDBColumnInstance();
         tableColumn.setColumnName(TABLE_COLUMN_NAME).setTableName(TABLE_NAME);
@@ -85,10 +88,14 @@ public class IDProvider {
         createBuilder.addColumnDefinition(instanceColumnDefinition);
         createBuilder.addColumnDefinition(idCountColumnDefinition);
 
+        Connection connection = connectionPool.getConnection();
+
         try {
-            createBuilder.getStatementBox().getPreparedStatement(connector.getConnection()).execute();
+            createBuilder.getStatementBox().getPreparedStatement(connection).execute();
         } catch (SQLException | QueryBuildException e) {
             e.printStackTrace();
+        } finally {
+            connectionPool.returnConnection(connection);
         }
     }
 
@@ -101,18 +108,22 @@ public class IDProvider {
 
     private boolean tableExists() {
 
-        IDBQueryBuilder queryBuilder = DBConnectionPool.getDefaultInstance().getQueryBuilder();
-        BasicSelect selectBuilder = queryBuilder.getSelectBuilder();
+        QueryFactory queryBuilder = connectionPool.getQueryFactory();
+        BasicSelectBuilder selectBuilder = queryBuilder.getSelectBuilder();
 
         selectBuilder.setTable(TABLE_NAME);
         selectBuilder.limit(1);
 
+        Connection connection = connectionPool.getConnection();
+
         try {
-            selectBuilder.getStatementBox().getPreparedStatement(connector.getConnection()).execute();
+            selectBuilder.getStatementBox().getPreparedStatement(connection).execute();
         } catch (SQLException e) {
             return false;
         } catch (QueryBuildException e) {
             e.printStackTrace();
+        } finally {
+            connectionPool.returnConnection(connection);
         }
         return true;
     }
@@ -127,11 +138,11 @@ public class IDProvider {
         if (!idHashMap.containsKey(tableName))
             idHashMap.put(tableName, new Stack<>());
 
-        Connection connection = connector.getConnection();
-        IDBQueryBuilder queryBuilder = DBConnectionPool.getDefaultInstance().getQueryBuilder();
+        Connection connection = connectionPool.getConnection();
+        QueryFactory queryBuilder = ConnectionPool.getDefaultInstance().getQueryFactory();
 
-        BasicSelect selectBuilder = queryBuilder.getSelectBuilder();
-        BasicInsert insertBuilder = queryBuilder.getInsertBuilder();
+        BasicSelectBuilder selectBuilder = queryBuilder.getSelectBuilder();
+        BasicInsertBuilder insertBuilder = queryBuilder.getInsertBuilder();
 
         Column tableColumn = queryBuilder.getNewDBColumnInstance();
         tableColumn.setColumnName(TABLE_COLUMN_NAME).setTableName(TABLE_NAME);

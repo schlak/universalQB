@@ -1,20 +1,20 @@
 package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
 
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
-import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
-import com.github.schlak.database.Definition.Statements.BasicCreate;
+import com.github.schlak.database.Definition.StatementBoxes.CreateBox;
+import com.github.schlak.database.Definition.Statements.BasicCreateBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
-import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MysqlColumnDefinition;
+import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLColumnDefinition;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlCreateBox;
 
 /**
  * Created by Jonas Schlak on 29.10.2016.
  */
-public class MysqlCreate extends BasicCreate {
+public class MySQLCreateBuilder extends BasicCreateBuilder {
 
     @Override
     public ColumnDefinition getNewColumnDefinition() {
-        return new MysqlColumnDefinition();
+        return new MySQLColumnDefinition();
     }
 
 
@@ -28,8 +28,9 @@ public class MysqlCreate extends BasicCreate {
     }
 
     @Override
-    public StatementBox getStatementBox() throws QueryBuildException {
+    public CreateBox getStatementBox() throws QueryBuildException {
         validate();
         return new MysqlCreateBox(columnDefinitionList, table);
     }
+
 }

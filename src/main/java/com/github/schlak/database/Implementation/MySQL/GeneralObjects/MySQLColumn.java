@@ -5,14 +5,14 @@ import com.github.schlak.database.Definition.GeneralObjects.Column;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlColumn extends Column {
+public class MySQLColumn extends Column {
 
-    public MysqlColumn(String tableName, String columnName) {
+    public MySQLColumn(String tableName, String columnName) {
         this.setTableName(tableName);
         this.setColumnName(columnName);
     }
 
-    public MysqlColumn() {
+    public MySQLColumn() {
     }
 
     @Override

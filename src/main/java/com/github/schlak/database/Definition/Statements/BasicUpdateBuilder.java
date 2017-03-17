@@ -6,6 +6,8 @@ import com.github.schlak.database.Definition.GeneralOperations.AddWhereClause;
 import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.GeneralOperations.SetValue;
 import com.github.schlak.database.Definition.IQuery;
+import com.github.schlak.database.Definition.StatementBoxes.UpdateBox;
+import com.github.schlak.database.Exeptions.QueryBuildException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.List;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class BasicUpdate implements SetTable, SetValue, AddWhereClause, IQuery {
+public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhereClause, IQuery {
 
     /**
      * The Table name.
@@ -32,7 +34,7 @@ public abstract class BasicUpdate implements SetTable, SetValue, AddWhereClause,
     /**
      * Instantiates a new Adb update builder.
      */
-    public BasicUpdate() {
+    public BasicUpdateBuilder() {
         this.valueAllocationList = new ArrayList<>();
     }
 
@@ -82,4 +84,7 @@ public abstract class BasicUpdate implements SetTable, SetValue, AddWhereClause,
     The possibility to set a limit of lines for an update is not planed
     at this point.
      */
+
+    @Override
+    public abstract UpdateBox getStatementBox() throws QueryBuildException;
 }

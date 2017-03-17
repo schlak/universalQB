@@ -7,7 +7,7 @@ import com.github.schlak.database.Definition.GeneralObjects.PreparedStatementPar
 import com.github.schlak.database.Definition.StatementBoxes.DeleteBox;
 import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
 import com.github.schlak.database.Exeptions.SQLAppendException;
-import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MysqlConditionStack;
+import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +36,7 @@ public class MysqlDeleteBox extends DeleteBox {
 
         if (!validateAppend(statementBox)) throw new SQLAppendException();
 
-        MysqlConditionStack conditionStack = new MysqlConditionStack();
+        MySQLConditionStack conditionStack = new MySQLConditionStack();
         conditionStack.setConditionLinkType(ConditionLinkType.OR);
 
         conditionStack.addCondition(this.conditionStack).

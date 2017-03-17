@@ -8,17 +8,17 @@ import com.github.schlak.database.Definition.GeneralObjects.TableJoinInformation
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlTableJoinInformation extends TableJoinInformation {
+public class MySQLTableJoinInformation extends TableJoinInformation {
 
-    public MysqlTableJoinInformation(Column baseTableColumn, Column joinTableColumn) throws Exception {
+    public MySQLTableJoinInformation(Column baseTableColumn, Column joinTableColumn) throws Exception {
         this.addJoinCondition(baseTableColumn, joinTableColumn);
     }
 
-    public MysqlTableJoinInformation(JoinCondition joinCondition) throws Exception {
+    public MySQLTableJoinInformation(JoinCondition joinCondition) throws Exception {
         this.addJoinCondition(joinCondition);
     }
 
-    public MysqlTableJoinInformation() {
+    public MySQLTableJoinInformation() {
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MysqlTableJoinInformation extends TableJoinInformation {
 
     @Override
     public JoinCondition getJoinConditionInstance() {
-        return new MysqlJoinCondition();
+        return new MySQLJoinCondition();
     }
 
     @Override

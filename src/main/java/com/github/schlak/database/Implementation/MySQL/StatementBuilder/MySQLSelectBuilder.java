@@ -6,30 +6,29 @@ import com.github.schlak.database.Definition.GeneralOperations.AddGroupByClause;
 import com.github.schlak.database.Definition.GeneralOperations.AddHavingClause;
 import com.github.schlak.database.Definition.GeneralOperations.AddJoinClause;
 import com.github.schlak.database.Definition.GeneralOperations.AddOrderByClause;
-import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
-import com.github.schlak.database.Definition.Statements.BasicSelect;
+import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
-import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MysqlConditionStack;
+import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlSelectBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MysqlSelect extends BasicSelect implements AddJoinClause, AddGroupByClause, AddHavingClause, AddOrderByClause {
+public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinClause, AddGroupByClause, AddHavingClause, AddOrderByClause {
 
-    private MysqlConditionStack havingConditionStack;
+    private MySQLConditionStack havingConditionStack;
     private List<TableJoinInformation> joinList;
     private List<Column> groupByList;
     private List<OrderByDefinition> orderByList;
 
     /**
-     * Instantiates a new {@link MysqlSelect}.
+     * Instantiates a new {@link MySQLSelectBuilder}.
      */
-    public MysqlSelect() {
+    public MySQLSelectBuilder() {
         super();
-        this.whereConditionStack = new MysqlConditionStack();
-        this.havingConditionStack = new MysqlConditionStack();
+        this.whereConditionStack = new MySQLConditionStack();
+        this.havingConditionStack = new MySQLConditionStack();
         this.joinList = new ArrayList<>();
         this.groupByList = new ArrayList<>();
         this.orderByList = new ArrayList<>();
@@ -104,7 +103,7 @@ public class MysqlSelect extends BasicSelect implements AddJoinClause, AddGroupB
     }
 
     /**
-     * The group by string that is generate is based on the {@link MysqlSelect#groupByList} and contains
+     * The group by string that is generate is based on the {@link MySQLSelectBuilder#groupByList} and contains
      * the "GROUP BY" preamble. If there are multiple groupings the columns are separated by an comma.
      *
      * @return group by string
@@ -127,7 +126,7 @@ public class MysqlSelect extends BasicSelect implements AddJoinClause, AddGroupB
     }
 
     /**
-     * The generation of the order by part is based on the {@link MysqlSelect#orderByList} with its
+     * The generation of the order by part is based on the {@link MySQLSelectBuilder#orderByList} with its
      * {@link OrderByDefinition}s which create the String for its column by calling the {@link OrderByDefinition#getOrderByString()}.
      * If there are multiple columns the result should be ordered by, the order strings per column will be connected with
      * commas.
@@ -151,7 +150,7 @@ public class MysqlSelect extends BasicSelect implements AddJoinClause, AddGroupB
 
     /**
      * The limit string just contains the key word "LIMIT" and the number of data sets the query will effect or in case
-     * of a select statement, the statement will return. If the field {@link MysqlSelect#limit} is zero the method
+     * of a select statement, the statement will return. If the field {@link MySQLSelectBuilder#limit} is zero the method
      * will return an empty string because there will be no limitation of the number of data sets.
      *
      * @return limit string
@@ -176,7 +175,7 @@ public class MysqlSelect extends BasicSelect implements AddJoinClause, AddGroupB
      * @throws QueryBuildException if the validation fails
      */
     @Override
-    public StatementBox getStatementBox() throws QueryBuildException {
+    public MysqlSelectBox getStatementBox() throws QueryBuildException {
         validate();
         return new MysqlSelectBox(table, getColumnString(),
                 getOrderByString(), getGroupByString(),

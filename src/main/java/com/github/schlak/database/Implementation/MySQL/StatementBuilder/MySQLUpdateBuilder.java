@@ -1,22 +1,21 @@
 package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
 
-import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
-import com.github.schlak.database.Definition.Statements.BasicUpdate;
+import com.github.schlak.database.Definition.Statements.BasicUpdateBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
-import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MysqlConditionStack;
+import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlUpdateBox;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MysqlUpdate extends BasicUpdate {
+public class MySQLUpdateBuilder extends BasicUpdateBuilder {
 
     /**
-     * Instantiates a new {@link MysqlUpdate}.
+     * Instantiates a new {@link MySQLUpdateBuilder}.
      */
-    public MysqlUpdate() {
+    public MySQLUpdateBuilder() {
         super();
-        this.whereConditionStack = new MysqlConditionStack();
+        this.whereConditionStack = new MySQLConditionStack();
     }
 
     private void validate() throws QueryBuildException {
@@ -37,7 +36,7 @@ public class MysqlUpdate extends BasicUpdate {
      * @throws QueryBuildException if the validation fails.
      */
     @Override
-    public StatementBox getStatementBox() throws QueryBuildException {
+    public MysqlUpdateBox getStatementBox() throws QueryBuildException {
         validate();
         return new MysqlUpdateBox(table, valueAllocationList,
                 whereConditionStack);

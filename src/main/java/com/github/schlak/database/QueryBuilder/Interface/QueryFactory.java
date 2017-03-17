@@ -7,42 +7,42 @@ import com.github.schlak.database.Manager.IDProvider;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public interface IDBQueryBuilder {
+public interface QueryFactory {
 
     /**
-     * Returns a new {@link BasicSelect}.
+     * Returns a new {@link BasicSelectBuilder}.
      *
-     * @return the {@link BasicSelect}
+     * @return the {@link BasicSelectBuilder}
      */
-    BasicSelect getSelectBuilder();
+    BasicSelectBuilder getSelectBuilder();
 
     /**
-     * Returns a new {@link BasicUpdate}.
+     * Returns a new {@link BasicUpdateBuilder}.
      *
-     * @return the {@link BasicUpdate}
+     * @return the {@link BasicUpdateBuilder}
      */
-    BasicUpdate getUpdateBuilder();
+    BasicUpdateBuilder getUpdateBuilder();
 
     /**
-     * Returns a new {@link BasicInsert}.
+     * Returns a new {@link BasicInsertBuilder}.
      *
-     * @return the {@link BasicInsert}
+     * @return the {@link BasicInsertBuilder}
      */
-    BasicInsert getInsertBuilder();
+    BasicInsertBuilder getInsertBuilder();
 
     /**
-     * Returns a new {@link BasicDelete}.
+     * Returns a new {@link BasicDeleteBuilder}.
      *
-     * @return the {@link BasicDelete}
+     * @return the {@link BasicDeleteBuilder}
      */
-    BasicDelete getDeleteBuilder();
+    BasicDeleteBuilder getDeleteBuilder();
 
     /**
-     * Returns a new {@link BasicCreate}.
+     * Returns a new {@link BasicCreateBuilder}.
      *
-     * @return the {@link BasicCreate}
+     * @return the {@link BasicCreateBuilder}
      */
-    BasicCreate getCreateBuilder();
+    BasicCreateBuilder getCreateBuilder();
 
     /**
      * Returns a new {@link ConditionStack}.

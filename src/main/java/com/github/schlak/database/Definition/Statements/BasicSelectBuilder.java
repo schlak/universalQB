@@ -8,6 +8,8 @@ import com.github.schlak.database.Definition.GeneralOperations.AddLimitClause;
 import com.github.schlak.database.Definition.GeneralOperations.AddWhereClause;
 import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.IQuery;
+import com.github.schlak.database.Definition.StatementBoxes.SelectBox;
+import com.github.schlak.database.Exeptions.QueryBuildException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * Created by jonas on 15.03.17.
  */
-public abstract class BasicSelect implements SetTable, AddColumnToShow,
+public abstract class BasicSelectBuilder implements SetTable, AddColumnToShow,
         AddWhereClause, AddLimitClause,
         IQuery {
     /**
@@ -38,7 +40,7 @@ public abstract class BasicSelect implements SetTable, AddColumnToShow,
      */
     protected int limit;
 
-    public BasicSelect() {
+    public BasicSelectBuilder() {
         this.columnList = new ArrayList<>();
 
         this.limit = 0;
@@ -70,4 +72,7 @@ public abstract class BasicSelect implements SetTable, AddColumnToShow,
             this.limit = 0;
         this.limit = limit;
     }
+
+    @Override
+    public abstract SelectBox getStatementBox() throws QueryBuildException;
 }

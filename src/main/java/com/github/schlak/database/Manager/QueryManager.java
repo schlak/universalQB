@@ -1,6 +1,6 @@
 package com.github.schlak.database.Manager;
 
-import com.github.schlak.database.DBConnectionPool;
+import com.github.schlak.database.ConnectionPool;
 import com.github.schlak.database.Debug;
 import com.github.schlak.database.Definition.StatementBoxes.*;
 import com.github.schlak.database.Exeptions.SQLAppendException;
@@ -205,11 +205,11 @@ public class QueryManager {
     }
 
     /**
-     * Closes the connections and return them to the {@link DBConnectionPool}.
+     * Closes the connections and return them to the {@link ConnectionPool}.
      */
     public void close() {
-        DBConnectionPool.getDefaultInstance().returnConnection(connectionQuick);
-        DBConnectionPool.getDefaultInstance().returnConnection(connection);
+        ConnectionPool.getDefaultInstance().returnConnection(connectionQuick);
+        ConnectionPool.getDefaultInstance().returnConnection(connection);
 
         connectionQuick = null;
         connection = null;
