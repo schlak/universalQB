@@ -13,7 +13,7 @@ public class InitDatabase {
         MySQLConnector connector = new MySQLConnector();
 
         connector.setDatabase("test");
-        connector.setHost("localhost");
+        connector.setHost("localhost:32772");
         connector.setPassword("root");
         connector.setUser("root");
 

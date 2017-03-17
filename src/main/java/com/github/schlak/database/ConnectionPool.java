@@ -4,7 +4,7 @@ package com.github.schlak.database;
 import com.github.schlak.database.Connector.Connector;
 import com.github.schlak.database.Implementation.MySQL.MySQLConnector;
 import com.github.schlak.database.Implementation.MySQL.MySQLQueryFactory;
-import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
+import com.github.schlak.database.Definition.QueryFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -48,7 +48,6 @@ public class ConnectionPool {
      * get added to the hash map by using the instantKeyString as the identifying key.
      *
      * @param connector        {@link Connector} the connector
-     * @return the iModelCallback     {@link ConnectionPool} the connection pool iModelCallback
      */
     public static void setup(Connector connector) {
         if (connectionPoolHashMap.size() == 0)
@@ -66,9 +65,8 @@ public class ConnectionPool {
      * get added to the hash map by using the instantKeyString as the identifying key.
      *
      * @param connector {@link Connector} the connector
-     * @return the iModelCallback     {@link ConnectionPool} the connection pool iModelCallback
      */
-    public static void setupDefault(Connector connector, Boolean isDefault) {
+    public static void setupDefault(Connector connector) {
 
         ConnectionPool.DEFAULT_INSTANCE = connector.getDatabaseIdentifier();
 

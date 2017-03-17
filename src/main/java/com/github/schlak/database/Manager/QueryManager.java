@@ -4,7 +4,7 @@ import com.github.schlak.database.ConnectionPool;
 import com.github.schlak.database.Debug;
 import com.github.schlak.database.Definition.StatementBoxes.*;
 import com.github.schlak.database.Exeptions.SQLAppendException;
-import com.github.schlak.database.QueryBuilder.Interface.IGetConnection;
+import com.github.schlak.database.Definition.IGetConnection;
 
 import java.sql.*;
 import java.util.ArrayDeque;

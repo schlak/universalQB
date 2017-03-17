@@ -5,8 +5,8 @@ import com.github.schlak.database.Definition.Statements.*;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.*;
 import com.github.schlak.database.Implementation.MySQL.StatementBuilder.*;
 import com.github.schlak.database.Manager.IDProvider;
-import com.github.schlak.database.QueryBuilder.Interface.IDProviderCallback;
-import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
+import com.github.schlak.database.Definition.IDProviderCallback;
+import com.github.schlak.database.Definition.QueryFactory;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.

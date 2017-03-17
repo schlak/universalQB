@@ -42,7 +42,6 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
      * added to the {@link BasicDeleteBuilder#whereConditionStack where condition stack}.
      *
      * @param valueAllocation is a {@link ValueAllocation value allocation}
-     * @return the {@link BasicDeleteBuilder actual instance} for chaining the method calls
      */
     public void where(ValueAllocation valueAllocation) {
         whereConditionStack.addCondition(valueAllocation);
@@ -54,7 +53,6 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
      * added to the {@link BasicDeleteBuilder#whereConditionStack where condition stack}.
      *
      * @param conditionStack is a {@link ConditionStack condition stack}
-     * @return the {@link BasicDeleteBuilder actual instance} for chaining the method calls
      */
     public void where(ConditionStack conditionStack) {
         whereConditionStack.addCondition(conditionStack);
@@ -67,7 +65,6 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
      * offers a generified way setting the table name regardless of the database implementation.
      *
      * @param tableName that will be set to the local variable {@link BasicDeleteBuilder#table table name}
-     * @return the {@link BasicDeleteBuilder actual instance} for chaining the method calls
      */
     public void setTable(String tableName) {
         this.table = tableName;

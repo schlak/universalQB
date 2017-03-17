@@ -11,7 +11,7 @@ import com.github.schlak.database.Definition.Statements.BasicCreateBuilder;
 import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
 import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
-import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
+import com.github.schlak.database.Definition.QueryFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

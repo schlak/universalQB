@@ -1,4 +1,4 @@
-package com.github.schlak.database.QueryBuilder.Interface;
+package com.github.schlak.database.Definition;
 
 import com.github.schlak.database.Manager.IDProvider;
 

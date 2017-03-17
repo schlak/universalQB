@@ -44,7 +44,6 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      * Add value allocation adb update builder.
      *
      * @param iValueAllocation the value allocation
-     * @return the adb update builder
      */
     public void set(ValueAllocation iValueAllocation) {
         valueAllocationList.add(iValueAllocation);
@@ -54,7 +53,6 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      * Add where condition adb update builder.
      *
      * @param iValueCondition the value condition
-     * @return the adb update builder
      */
     public void where(ValueAllocation iValueCondition) {
         whereConditionStack.addCondition(iValueCondition);
@@ -64,7 +62,6 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      * Add where condition adb update builder.
      *
      * @param iConditionStack the condition stack
-     * @return the adb update builder
      */
     public void where(ConditionStack iConditionStack) {
         whereConditionStack.addCondition(iConditionStack);
@@ -74,7 +71,6 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      * Sets table.
      *
      * @param table the table
-     * @return the table
      */
     public void setTable(String table) {
         this.table = table;

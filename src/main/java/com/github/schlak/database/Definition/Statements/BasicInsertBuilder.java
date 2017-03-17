@@ -44,7 +44,6 @@ public abstract class BasicInsertBuilder implements SetTable, SetValue, IQuery {
      * class the possibility of adding a {@link ValueAllocation value allocation} with the same method call.
      *
      * @param iValueAllocation the value allocation
-     * @return the {@link BasicInsertBuilder actual instance} for chaining the method calls
      */
     public void set(ValueAllocation iValueAllocation) {
         this.valueAllocationList.add(iValueAllocation);
@@ -57,7 +56,6 @@ public abstract class BasicInsertBuilder implements SetTable, SetValue, IQuery {
      * offers a generified way setting the table name regardless of the database implementation.
      *
      * @param tableName that will be set to the local variable {@link BasicInsertBuilder#tableName table name}
-     * @return the {@link BasicInsertBuilder actual instance} for chaining the method calls
      */
     public void setTable(String tableName) {
         this.tableName = tableName;

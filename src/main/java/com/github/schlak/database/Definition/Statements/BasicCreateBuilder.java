@@ -48,7 +48,6 @@ public abstract class BasicCreateBuilder implements SetTable, AddColumnDefinitio
      * store.
      *
      * @param columnDefinition that should be add to the {@link BasicCreateBuilder}
-     * @return the {@link BasicCreateBuilder actual instance} for chaining the method calls
      */
     public void addColumnDefinition(ColumnDefinition columnDefinition) {
         columnDefinitionList.add(columnDefinition);
@@ -73,7 +72,6 @@ public abstract class BasicCreateBuilder implements SetTable, AddColumnDefinitio
      * offers a generified way setting the table name regardless of the database implementation.
      *
      * @param tableName that will be set to the local variable {@link BasicCreateBuilder#table table name}
-     * @return the {@link BasicCreateBuilder actual instance} for chaining the method calls
      */
     public void setTable(String tableName) {
         this.table = tableName;

@@ -5,6 +5,7 @@ import com.github.schlak.database.Definition.FixedValues.BasicDataType;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
+import com.github.schlak.database.Definition.QueryFactory;
 import com.github.schlak.database.Definition.StatementBoxes.CreateBox;
 import com.github.schlak.database.Definition.StatementBoxes.InsertBox;
 import com.github.schlak.database.Definition.StatementBoxes.SelectBox;
@@ -14,25 +15,18 @@ import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
 import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Definition.Statements.BasicUpdateBuilder;
 import com.github.schlak.database.Implementation.MySQL.MySQLConnector;
-import com.github.schlak.database.Definition.QueryFactory;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 /**
- * Created by jonas on 17.03.17.
+ * Created by jschl on 17.03.2017.
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SimpleTest {
+public class SimpleTestMethods {
 
-    public static String TABLE = "testTabelle";
     public static String COLUMN_ID = "id";
     public static String COLUMN_NAME = "name";
 
-    @Test
-    public void AcreateTest() throws Exception {
+    public static void AcreateTest(String TABLE) throws Exception {
 
-        InitDatabase.setup();
         ConnectionPool connectionPool = ConnectionPool.getInstance(new MySQLConnector().getDatabaseIdentifier());
 
         QueryFactory factory = connectionPool.getQueryFactory();
@@ -62,10 +56,8 @@ public class SimpleTest {
         createBox.getPreparedStatement(connectionPool.getConnection()).execute();
     }
 
-    @Test
-    public void BinsertTest() throws Exception {
+    public static void BinsertTest(String TABLE) throws Exception {
 
-        InitDatabase.setup();
         ConnectionPool connectionPool = ConnectionPool.getInstance(new MySQLConnector().getDatabaseIdentifier());
 
         QueryFactory factory = connectionPool.getQueryFactory();
@@ -94,10 +86,8 @@ public class SimpleTest {
         insertBox.getPreparedStatement(connectionPool.getConnection()).execute();
     }
 
-    @Test
-    public void CselectTest() throws Exception {
+    public static void CselectTest(String TABLE) throws Exception {
 
-        InitDatabase.setup();
         ConnectionPool connectionPool = ConnectionPool.getInstance(new MySQLConnector().getDatabaseIdentifier());
 
         QueryFactory factory = connectionPool.getQueryFactory();
@@ -111,10 +101,8 @@ public class SimpleTest {
 
     }
 
-    @Test
-    public void DupdateTest() throws Exception {
+    public static void DupdateTest(String TABLE, String newText) throws Exception {
 
-        InitDatabase.setup();
         ConnectionPool connectionPool = ConnectionPool.getDefaultInstance();
 
         QueryFactory factory = connectionPool.getQueryFactory();
@@ -127,7 +115,7 @@ public class SimpleTest {
         columnName.setTableName(TABLE).setColumnName(COLUMN_NAME);
 
         ValueAllocation valueAllocation_name = factory.getNewValueAllocationInstance();
-        valueAllocation_name.setColumn(columnName).setValue("BlaU");
+        valueAllocation_name.setColumn(columnName).setValue(newText);
 
         updateBuilder.set(valueAllocation_name);
 
@@ -136,13 +124,33 @@ public class SimpleTest {
 
     }
 
+    public static void EdropTable(String TABLE) throws Exception {
 
-    @Test
-    public void EdropTable() throws Exception {
-        InitDatabase.setup();
         ConnectionPool connectionPool = ConnectionPool.getInstance(new MySQLConnector().getDatabaseIdentifier());
 
         connectionPool.getConnection().prepareStatement("DROP TABLE IF EXISTS " + TABLE).execute();
+    }
+
+
+    public static void normalSelect(String Table)throws Exception{
+        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("SELECT  * FROM " + Table).execute();
+    }
+
+    public static void normalCreate(String Table)throws Exception{
+        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("CREATE TABLE "+ Table +"(id INTEGER, name TEXT);").execute();
+    }
+
+    public static void normalInsert(String Table, String id)throws Exception{
+        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("INSERT INTO "+ Table +" (id, name) VALUES ( " + id + " , 'bal' );").execute();
+    }
+
+    public static void normalDrop(String Table)throws Exception{
+        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("DROP TABLE " + Table).execute();
+    }
+
+
+    public static void normalUpdate(String Table)throws Exception{
+        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("UPDATE "+ Table +" SET name = 'bal' ; ").execute();
     }
 
 }
