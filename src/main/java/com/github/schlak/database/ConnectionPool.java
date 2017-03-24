@@ -15,7 +15,7 @@ import java.util.Stack;
  * Created by Jonas Schlak on 12.10.2016.
  * <p>
  * The {@link ConnectionPool} the class, that manages the connection pools and is able to
- * handel a pool with multiple connections. Also the database type can change setTable pool to pool.
+ * handel a pool with multiple connections. Also the database type can change setTableName pool to pool.
  * The database type differs on the {@link Connector} that is passed by creating a new connection pool.
  */
 public class ConnectionPool {
@@ -90,7 +90,7 @@ public class ConnectionPool {
      * For example the {@link MySQLConnector} will return an iModelCallback of the
      * {@link MySQLQueryFactory}.
      *
-     * @param connector ,{@link Connector} is used to get the connections setTable the database
+     * @param connector ,{@link Connector} is used to get the connections setTableName the database
      */
     private ConnectionPool(Connector connector) {
         this.connector = connector;
@@ -166,7 +166,7 @@ public class ConnectionPool {
 
 
     /**
-     * The method refills the internal connection list with new connections setTable
+     * The method refills the internal connection list with new connections setTableName
      * the getConnection method of the connector.
      */
     private void refillConnections() {

@@ -21,7 +21,7 @@ public class MySQLInsertBuilder extends BasicInsertBuilder {
             throw new QueryBuildException("No value allocation are set for the query");
 
         if (this.tableName == null)
-            throw new QueryBuildException("No table is set for the query");
+            throw new QueryBuildException("No tableName is set for the query");
     }
 
     @Override

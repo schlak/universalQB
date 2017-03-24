@@ -6,7 +6,7 @@ import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 import com.github.schlak.database.Definition.QueryFactory;
-import com.github.schlak.database.Definition.StatementBoxes.CreateBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox;
 import com.github.schlak.database.Definition.StatementBoxes.InsertBox;
 import com.github.schlak.database.Definition.StatementBoxes.SelectBox;
 import com.github.schlak.database.Definition.StatementBoxes.UpdateBox;
@@ -15,7 +15,6 @@ import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
 import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Definition.Statements.BasicUpdateBuilder;
 import com.github.schlak.database.Implementation.MySQL.MySQLConnector;
-import org.junit.Test;
 
 /**
  * Created by jschl on 17.03.2017.
@@ -33,7 +32,7 @@ public class SimpleTestMethods {
 
         BasicCreateBuilder createBuilder = factory.getCreateBuilder();
 
-        createBuilder.setTable(TABLE);
+        createBuilder.setTableName(TABLE);
 
         Column column = factory.getNewDBColumnInstance();
         column.setTableName(TABLE).setColumnName(COLUMN_ID);
@@ -50,7 +49,7 @@ public class SimpleTestMethods {
         createBuilder.addColumnDefinition(columnDefinition);
         createBuilder.addColumnDefinition(columnDefinition1);
 
-        CreateBox createBox = createBuilder.getStatementBox();
+        BasicCreateBox createBox = createBuilder.getStatementBox();
 
 
         createBox.getPreparedStatement(connectionPool.getConnection()).execute();
@@ -64,7 +63,7 @@ public class SimpleTestMethods {
 
         BasicInsertBuilder insertBuilder = factory.getInsertBuilder();
 
-        insertBuilder.setTable(TABLE);
+        insertBuilder.setTableName(TABLE);
 
         Column columnID = factory.getNewDBColumnInstance();
         columnID.setTableName(TABLE).setColumnName(COLUMN_ID);
@@ -94,7 +93,7 @@ public class SimpleTestMethods {
 
         BasicSelectBuilder selectBuilder = factory.getSelectBuilder();
 
-        selectBuilder.setTable(TABLE);
+        selectBuilder.setTableName(TABLE);
 
         SelectBox selectBox = selectBuilder.getStatementBox();
         selectBox.getPreparedStatement(connectionPool.getConnection()).execute();
@@ -109,7 +108,7 @@ public class SimpleTestMethods {
 
         BasicUpdateBuilder updateBuilder = factory.getUpdateBuilder();
 
-        updateBuilder.setTable(TABLE);
+        updateBuilder.setTableName(TABLE);
 
         Column columnName = factory.getNewDBColumnInstance();
         columnName.setTableName(TABLE).setColumnName(COLUMN_NAME);

@@ -16,7 +16,7 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
 
     /**
      * The column definition list is used to store all {@link ColumnDefinition column definitions}. These will be used
-     * to create the table.
+     * to create the tableName.
      */
     protected String table = null;
 
@@ -59,14 +59,14 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
     }
 
     /**
-     * The method sets the given value as the table name.
+     * The method sets the given value as the tableName name.
      * <p>
-     * Set table method grants the set access to the {@link BasicDeleteBuilder#table table name} variable and
-     * offers a generified way setting the table name regardless of the database implementation.
+     * Set tableName method grants the set access to the {@link BasicDeleteBuilder#table tableName name} variable and
+     * offers a generified way setting the tableName name regardless of the database implementation.
      *
-     * @param tableName that will be set to the local variable {@link BasicDeleteBuilder#table table name}
+     * @param tableName that will be set to the local variable {@link BasicDeleteBuilder#table tableName name}
      */
-    public void setTable(String tableName) {
+    public void setTableName(String tableName) {
         this.table = tableName;
     }
 

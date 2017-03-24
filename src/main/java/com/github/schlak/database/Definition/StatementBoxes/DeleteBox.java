@@ -3,6 +3,11 @@ package com.github.schlak.database.Definition.StatementBoxes;
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Exeptions.SQLAppendException;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Queue;
+
 /**
  * Created by Jonas Schlak on 24.01.17.
  */
@@ -20,7 +25,7 @@ public abstract class DeleteBox extends StatementBox {
     /**
      * Instantiates a new Delete box.
      *
-     * @param tableName          the table name
+     * @param tableName          the tableName name
      * @param conditionStackList the condition stack list
      */
     public DeleteBox(String tableName, ConditionStack conditionStackList) {
@@ -50,9 +55,9 @@ public abstract class DeleteBox extends StatementBox {
     }
 
     /**
-     * Gets table name.
+     * Gets tableName name.
      *
-     * @return the table name
+     * @return the tableName name
      */
     public String getTableName() {
         return tableName;
@@ -69,5 +74,10 @@ public abstract class DeleteBox extends StatementBox {
     @Override
     public Class getType() {
         return DeleteBox.class;
+    }
+
+    @Override
+    public Queue<String> getParameterQueue() {
+        return this.conditionStack.getStatementPreparationBox().queue;
     }
 }

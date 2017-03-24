@@ -12,10 +12,10 @@ public class InitDatabase {
 
         MySQLConnector connector = new MySQLConnector();
 
-        connector.setDatabase("test");
-        connector.setHost("localhost:32772");
-        connector.setPassword("root");
-        connector.setUser("root");
+        connector.setDatabase(System.getenv("DBNAME"));
+        connector.setHost(System.getenv("DBHOST") + ":" + System.getenv("DBPORT"));
+        connector.setPassword(System.getenv("DBPASS"));
+        connector.setUser(System.getenv("DBUSER"));
 
         ConnectionPool.setup(connector);
 

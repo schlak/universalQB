@@ -1,7 +1,7 @@
 package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
 
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
-import com.github.schlak.database.Definition.StatementBoxes.CreateBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox;
 import com.github.schlak.database.Definition.Statements.BasicCreateBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLColumnDefinition;
@@ -23,14 +23,14 @@ public class MySQLCreateBuilder extends BasicCreateBuilder {
         if (columnDefinitionList.size() == 1)
             throw new QueryBuildException("No value allocation are set for the query");
 
-        if (this.table == null)
-            throw new QueryBuildException("No table is set for the query");
+        if (this.tableName == null)
+            throw new QueryBuildException("No tableName is set for the query");
     }
 
     @Override
-    public CreateBox getStatementBox() throws QueryBuildException {
+    public BasicCreateBox getStatementBox() throws QueryBuildException {
         validate();
-        return new MysqlCreateBox(columnDefinitionList, table);
+        return new MysqlCreateBox(columnDefinitionList, tableName);
     }
 
 }

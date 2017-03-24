@@ -24,7 +24,7 @@ public class MySQLUpdateBuilder extends BasicUpdateBuilder {
             throw new QueryBuildException("No value allocation are set for the query");
 
         if (this.table == null)
-            throw new QueryBuildException("No table is set for the query");
+            throw new QueryBuildException("No tableName is set for the query");
     }
 
     /**

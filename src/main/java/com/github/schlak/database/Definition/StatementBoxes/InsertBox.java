@@ -3,8 +3,10 @@ package com.github.schlak.database.Definition.StatementBoxes;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 import com.github.schlak.database.Exeptions.SQLAppendException;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by Jonas Schlak on 25.01.17.
@@ -23,7 +25,7 @@ public abstract class InsertBox extends StatementBox {
     /**
      * Instantiates a new Insert box.
      *
-     * @param tableName           the table name
+     * @param tableName           the tableName name
      * @param valueAllocationList the value allocation list
      */
     public InsertBox(String tableName, List<ValueAllocation> valueAllocationList) {
@@ -53,9 +55,9 @@ public abstract class InsertBox extends StatementBox {
     public abstract void appendStatement(StatementBox statementBox) throws SQLAppendException;
 
     /**
-     * Returns the table name.
+     * Returns the tableName name.
      *
-     * @return the table name
+     * @return the tableName name
      */
     public String getTableName() {
         return tableName;
@@ -73,5 +75,14 @@ public abstract class InsertBox extends StatementBox {
     @Override
     public Class getType() {
         return InsertBox.class;
+    }
+
+    @Override
+    public Queue<String> getParameterQueue() {
+        Queue<String> parameterQueue = new ArrayDeque<>();
+
+        valueAllocationList.forEach(list -> list.forEach(valueAllocation -> parameterQueue.add(valueAllocation.getValue())));
+
+        return parameterQueue;
     }
 }

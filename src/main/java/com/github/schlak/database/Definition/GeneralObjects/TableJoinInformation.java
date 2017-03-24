@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class TableJoinInformation {
 
     /**
-     * The Base table.
+     * The Base tableName.
      */
     protected String baseTable;
     /**
@@ -66,7 +66,7 @@ public abstract class TableJoinInformation {
         this.baseTable = baseTableColumn.getTableName();
         if (this.baseTable.equals(baseTableColumn.getTableName()) || this.baseTable.equals(""))
             this.baseTable = baseTableColumn.getTableName();
-        else throw new Exception("Illegal table exception");
+        else throw new Exception("Illegal tableName exception");
 
         JoinCondition joinCondition = this.getJoinConditionInstance();
 
@@ -85,10 +85,10 @@ public abstract class TableJoinInformation {
     public void addJoinCondition(JoinCondition joinCondition) throws Exception {
         if (joinCondition.getBaseTableName().equals(this.baseTable) || this.baseTable.equals(""))
             this.baseTable = joinCondition.getBaseTableName();
-        else throw new Exception("Illegal table exception");
+        else throw new Exception("Illegal tableName exception");
         if (joinCondition.getJoinTableName().equals(this.tableToJoin) || this.tableToJoin.equals(""))
             this.tableToJoin = joinCondition.getJoinTableName();
-        else throw new Exception("Illegal table exception");
+        else throw new Exception("Illegal tableName exception");
 
         this.joinCondition.add(joinCondition);
     }

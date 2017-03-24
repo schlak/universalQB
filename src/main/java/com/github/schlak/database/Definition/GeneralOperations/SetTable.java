@@ -5,6 +5,6 @@ package com.github.schlak.database.Definition.GeneralOperations;
  */
 public interface SetTable {
 
-    void setTable(String tableName);
+    void setTableName(String tableName);
 
 }

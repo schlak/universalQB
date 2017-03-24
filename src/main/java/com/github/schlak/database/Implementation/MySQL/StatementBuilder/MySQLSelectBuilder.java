@@ -42,14 +42,14 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
 
     /**
      * The validate method is used to rudimentary check whether it is possible or not to build a proper SQL statement based on the
-     * parameters given. For the select statement the validation only checks the table name because without a table
+     * parameters given. For the select statement the validation only checks the tableName name because without a tableName
      * name the selection could base no statement will work. The other logical dependencies are not checked.
      *
      * @throws QueryBuildException
      */
     private void validate() throws QueryBuildException {
         if (this.table == null)
-            throw new QueryBuildException("No table is set for the query");
+            throw new QueryBuildException("No tableName is set for the query");
     }
 
 
@@ -83,7 +83,7 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
      * The parts of the string, which were generated in the {@link TableJoinInformation#getJoinString()} method
      * and get connected by spaces.
      * <p>
-     * //TODO change the method naming setTable to string to something like getJoinStatement
+     * //TODO change the method naming setTableName to string to something like getJoinStatement
      *
      * @return join string
      */

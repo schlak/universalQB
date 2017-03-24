@@ -51,8 +51,7 @@ public abstract class BasicSelectBuilder implements SetTable, AddColumnToShow,
         this.columnList.add(column);
     }
 
-    @Override
-    public void setTable(String tableName) {
+    public void setTableName(String tableName) {
         this.table = tableName;
     }
 

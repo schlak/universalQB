@@ -40,11 +40,11 @@ public abstract class SelectBox extends StatementBox {
     /**
      * Instantiates a new Select box.
      *
-     * @param tableName                the table name
+     * @param tableName                the tableName name
      * @param shownColumnList          the shown column list
      * @param orderAOderByColumnList   the order a oder by column list
      * @param groupingColumnList       the grouping column list
-     * @param tableJoinInformationList the table join information list
+     * @param tableJoinInformationList the tableName join information list
      * @param whereConditionStack      the where condition stack
      * @param havingConditionStack     the having condition stack
      */

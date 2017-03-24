@@ -25,7 +25,7 @@ public class QueryManager {
     private ArrayList<StatementBox> queryList = new ArrayList<>();
 
     private ArrayList<DeleteBox> deleteBoxes = new ArrayList<>();
-    private ArrayList<CreateBox> createBoxes = new ArrayList<>();
+    private ArrayList<BasicCreateBox> createBoxes = new ArrayList<>();
     private ArrayList<UpdateBox> updateBoxes = new ArrayList<>();
     private ArrayList<InsertBox> insertBoxes = new ArrayList<>();
 
@@ -65,14 +65,14 @@ public class QueryManager {
     }
 
     /**
-     * Add a {@link CreateBox} to the {@link QueryManager}.
+     * Add a {@link BasicCreateBox} to the {@link QueryManager}.
      * The method try's to identify statements that got added a second time and remove the second {@link StatementBox}.
      *
-     * @param createBox the {@link CreateBox}
+     * @param createBox the {@link BasicCreateBox}
      */
-    public void add(CreateBox createBox) {
+    public void add(BasicCreateBox createBox) {
 
-        for (CreateBox stmtBox :
+        for (BasicCreateBox stmtBox :
                 createBoxes) {
             if (stmtBox.equals(createBox)) return;
         }
@@ -109,8 +109,8 @@ public class QueryManager {
      */
     public void add(StatementBox statementBox) {
 
-        if (statementBox.getType().equals(CreateBox.class))
-            add((CreateBox) statementBox);
+        if (statementBox.getType().equals(BasicCreateBox.class))
+            add((BasicCreateBox) statementBox);
         if (statementBox.getType().equals(UpdateBox.class))
             updateBoxes.add((UpdateBox) statementBox);
         if (statementBox.getType().equals(InsertBox.class))

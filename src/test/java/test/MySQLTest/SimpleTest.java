@@ -5,7 +5,7 @@ import com.github.schlak.database.Definition.FixedValues.BasicDataType;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
-import com.github.schlak.database.Definition.StatementBoxes.CreateBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox;
 import com.github.schlak.database.Definition.StatementBoxes.InsertBox;
 import com.github.schlak.database.Definition.StatementBoxes.SelectBox;
 import com.github.schlak.database.Definition.StatementBoxes.UpdateBox;
@@ -39,7 +39,7 @@ public class SimpleTest {
 
         BasicCreateBuilder createBuilder = factory.getCreateBuilder();
 
-        createBuilder.setTable(TABLE);
+        createBuilder.setTableName(TABLE);
 
         Column column = factory.getNewDBColumnInstance();
         column.setTableName(TABLE).setColumnName(COLUMN_ID);
@@ -56,7 +56,7 @@ public class SimpleTest {
         createBuilder.addColumnDefinition(columnDefinition);
         createBuilder.addColumnDefinition(columnDefinition1);
 
-        CreateBox createBox = createBuilder.getStatementBox();
+        BasicCreateBox createBox = createBuilder.getStatementBox();
 
 
         createBox.getPreparedStatement(connectionPool.getConnection()).execute();
@@ -72,7 +72,7 @@ public class SimpleTest {
 
         BasicInsertBuilder insertBuilder = factory.getInsertBuilder();
 
-        insertBuilder.setTable(TABLE);
+        insertBuilder.setTableName(TABLE);
 
         Column columnID = factory.getNewDBColumnInstance();
         columnID.setTableName(TABLE).setColumnName(COLUMN_ID);
@@ -104,7 +104,7 @@ public class SimpleTest {
 
         BasicSelectBuilder selectBuilder = factory.getSelectBuilder();
 
-        selectBuilder.setTable(TABLE);
+        selectBuilder.setTableName(TABLE);
 
         SelectBox selectBox = selectBuilder.getStatementBox();
         selectBox.getPreparedStatement(connectionPool.getConnection()).execute();
@@ -121,7 +121,7 @@ public class SimpleTest {
 
         BasicUpdateBuilder updateBuilder = factory.getUpdateBuilder();
 
-        updateBuilder.setTable(TABLE);
+        updateBuilder.setTableName(TABLE);
 
         Column columnName = factory.getNewDBColumnInstance();
         columnName.setTableName(TABLE).setColumnName(COLUMN_NAME);

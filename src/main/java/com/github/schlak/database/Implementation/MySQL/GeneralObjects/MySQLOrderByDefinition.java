@@ -1,6 +1,6 @@
 package com.github.schlak.database.Implementation.MySQL.GeneralObjects;
 
-import com.github.schlak.database.Definition.FixedValues.DBOrderByStrategy;
+import com.github.schlak.database.Definition.FixedValues.OrderByStrategy;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.OrderByDefinition;
 
@@ -9,19 +9,19 @@ import com.github.schlak.database.Definition.GeneralObjects.OrderByDefinition;
  */
 public class MySQLOrderByDefinition extends OrderByDefinition {
     @Override
-    public OrderByDefinition setColumn(Column iDBColumn) {
-        this.column = iDBColumn;
+    public OrderByDefinition setColumn(Column column) {
+        this.column = column;
         return this;
     }
 
     @Override
-    public OrderByDefinition setDBOrderBYStrategy(DBOrderByStrategy orderBYStrategy) {
-        this.dbOrderByStrategy = orderBYStrategy;
+    public OrderByDefinition setOrderByStrategy(OrderByStrategy orderBYStrategy) {
+        this.orderByStrategy = orderBYStrategy;
         return this;
     }
 
     @Override
     public String getOrderByString() {
-        return this.column.getColumnString() + " " + this.dbOrderByStrategy.toString();
+        return this.column.getColumnString() + " " + this.orderByStrategy.toString();
     }
 }

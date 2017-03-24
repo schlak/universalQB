@@ -14,6 +14,13 @@ public abstract class Column {
      */
     protected String columnName;
 
+    public Column(String tableName, String columnName){
+        this.setTableName(tableName);
+        this.setColumnName(columnName);
+    }
+
+    public Column(){};
+
     /**
      * Get the column name.
      *
@@ -35,19 +42,19 @@ public abstract class Column {
     }
 
     /**
-     * Get the table name.
+     * Get the tableName name.
      *
-     * @return the table name
+     * @return the tableName name
      */
     public String getTableName() {
         return this.tableName;
     }
 
     /**
-     * Set the table name.
+     * Set the tableName name.
      *
-     * @param tableName the table name
-     * @return the table name
+     * @param tableName the tableName name
+     * @return the tableName name
      */
     public Column setTableName(String tableName) {
         this.tableName = tableName;

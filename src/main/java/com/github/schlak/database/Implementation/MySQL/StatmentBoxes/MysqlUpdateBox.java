@@ -23,7 +23,6 @@ public class MysqlUpdateBox extends UpdateBox {
 
     @Override
     public PreparedStatement getStatement(Connection connection) throws SQLException {
-
         boolean isFirst = true;
         StringBuilder stringBuilder = new StringBuilder("UPDATE " + this.tableName + " SET ");
 
@@ -61,7 +60,6 @@ public class MysqlUpdateBox extends UpdateBox {
 
     @Override
     public String getPreparedStatementString() {
-
         boolean isFirst = true;
         StringBuilder stringBuilder = new StringBuilder("UPDATE " + this.tableName + " SET ");
 

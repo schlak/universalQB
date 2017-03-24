@@ -22,7 +22,7 @@ public class MySQLDeleteBuilder extends BasicDeleteBuilder {
     private void validate() throws QueryBuildException {
 
         if (this.table == null)
-            throw new QueryBuildException("No table is set for the query");
+            throw new QueryBuildException("No tableName is set for the query");
     }
 
 

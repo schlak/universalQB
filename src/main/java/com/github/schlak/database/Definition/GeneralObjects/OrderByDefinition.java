@@ -1,6 +1,6 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
-import com.github.schlak.database.Definition.FixedValues.DBOrderByStrategy;
+import com.github.schlak.database.Definition.FixedValues.OrderByStrategy;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
@@ -14,30 +14,30 @@ public abstract class OrderByDefinition {
     /**
      * The Db order by strategy.
      */
-    protected DBOrderByStrategy dbOrderByStrategy;
+    protected OrderByStrategy orderByStrategy;
 
     /**
      * Instantiates a new {@link OrderByDefinition} object.
      */
     public OrderByDefinition() {
-        this.dbOrderByStrategy = DBOrderByStrategy.ASC;
+        this.orderByStrategy = OrderByStrategy.ASC;
     }
 
     /**
      * Set the {@link Column}.
      *
-     * @param iDBColumn the {@link Column}
+     * @param column the {@link Column}
      * @return the {@link OrderByDefinition}
      */
-    public abstract OrderByDefinition setColumn(Column iDBColumn);
+    public abstract OrderByDefinition setColumn(Column column);
 
     /**
-     * Set the {@link DBOrderByStrategy}.
+     * Set the {@link OrderByStrategy}.
      *
-     * @param orderBYStrategy the {@link DBOrderByStrategy}
-     * @return the {@link DBOrderByStrategy}
+     * @param orderBYStrategy the {@link OrderByStrategy}
+     * @return the {@link OrderByStrategy}
      */
-    public abstract OrderByDefinition setDBOrderBYStrategy(DBOrderByStrategy orderBYStrategy);
+    public abstract OrderByDefinition setOrderByStrategy(OrderByStrategy orderBYStrategy);
 
     /**
      * Returns the order by string.

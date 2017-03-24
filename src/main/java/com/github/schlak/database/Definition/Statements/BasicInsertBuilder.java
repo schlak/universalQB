@@ -16,14 +16,14 @@ import java.util.List;
 public abstract class BasicInsertBuilder implements SetTable, SetValue, IQuery {
 
     /**
-     * The table name field contains the name of the created table. It is used in this class to
-     * generify the logic how a table name is set and stored in the create builder.
+     * The tableName name field contains the name of the created tableName. It is used in this class to
+     * generify the logic how a tableName name is set and stored in the create builder.
      */
     protected String tableName;
 
     /**
      * The value allocation list is used to store all {@link ValueAllocation value allocations}. These will be
-     * inserted as a neu data set into the defined table.
+     * inserted as a neu data set into the defined tableName.
      */
     protected List<ValueAllocation> valueAllocationList;
 
@@ -40,7 +40,7 @@ public abstract class BasicInsertBuilder implements SetTable, SetValue, IQuery {
 
     /**
      * Adding a {@link ValueAllocation value allocation} to the list. The added values will be inserted in the
-     * defined table as a new data set. The method is generified to give all classes that inherent {@link BasicInsertBuilder this}
+     * defined tableName as a new data set. The method is generified to give all classes that inherent {@link BasicInsertBuilder this}
      * class the possibility of adding a {@link ValueAllocation value allocation} with the same method call.
      *
      * @param iValueAllocation the value allocation
@@ -50,14 +50,14 @@ public abstract class BasicInsertBuilder implements SetTable, SetValue, IQuery {
     }
 
     /**
-     * The method sets the given value as the table name.
+     * The method sets the given value as the tableName name.
      * <p>
-     * Set table method grants the set access to the {@link BasicInsertBuilder#tableName table name} variable and
-     * offers a generified way setting the table name regardless of the database implementation.
+     * Set tableName method grants the set access to the {@link BasicInsertBuilder#tableName tableName name} variable and
+     * offers a generified way setting the tableName name regardless of the database implementation.
      *
-     * @param tableName that will be set to the local variable {@link BasicInsertBuilder#tableName table name}
+     * @param tableName that will be set to the local variable {@link BasicInsertBuilder#tableName tableName name}
      */
-    public void setTable(String tableName) {
+    public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 

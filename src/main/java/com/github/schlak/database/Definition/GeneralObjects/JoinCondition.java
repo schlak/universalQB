@@ -55,18 +55,18 @@ public abstract class JoinCondition {
     }
 
     /**
-     * Returns the base table name.
+     * Returns the base tableName name.
      *
-     * @return the base table name
+     * @return the base tableName name
      */
     public String getBaseTableName() {
         return baseColumn.tableName;
     }
 
     /**
-     * Returns the join table name.
+     * Returns the join tableName name.
      *
-     * @return the join table name
+     * @return the join tableName name
      */
     public String getJoinTableName() {
         return this.joinColumn.tableName;

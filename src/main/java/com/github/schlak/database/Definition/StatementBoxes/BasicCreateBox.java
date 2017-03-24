@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Jonas Schlak on 25.01.17.
  */
-public abstract class CreateBox extends StatementBox {
+public abstract class BasicCreateBox extends StatementBox {
 
     /**
      * The Column definition list.
@@ -24,14 +24,14 @@ public abstract class CreateBox extends StatementBox {
      * @param columnDefinitionList the column definition list
      * @param tableName            the table name
      */
-    public CreateBox(List<ColumnDefinition> columnDefinitionList, String tableName) {
+    public BasicCreateBox(List<ColumnDefinition> columnDefinitionList, String tableName) {
         this.columnDefinitionList = columnDefinitionList;
         this.tableName = tableName;
     }
 
     @Override
     public Class getType() {
-        return CreateBox.class;
+        return BasicCreateBox.class;
     }
 
     @Override
@@ -39,10 +39,10 @@ public abstract class CreateBox extends StatementBox {
         if (obj == null)
             return false;
 
-        if (!obj.getClass().equals(CreateBox.class))
+        if (!obj.getClass().equals(BasicCreateBox.class))
             return false;
 
-        CreateBox createBox = (CreateBox) obj;
+        BasicCreateBox createBox = (BasicCreateBox) obj;
 
         return createBox.tableName.equals(this.tableName);
     }

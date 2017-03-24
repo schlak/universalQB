@@ -68,11 +68,11 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
     }
 
     /**
-     * Sets table.
+     * Sets tableName.
      *
-     * @param table the table
+     * @param table the tableName
      */
-    public void setTable(String table) {
+    public void setTableName(String table) {
         this.table = table;
     }
 

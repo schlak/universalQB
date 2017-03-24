@@ -4,6 +4,7 @@ package com.github.schlak.database.Implementation.MySQL.StatmentBoxes;
 import com.github.schlak.database.Definition.FixedValues.ConditionLinkType;
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Definition.GeneralObjects.PreparedStatementPart;
+import com.github.schlak.database.Definition.GeneralObjects.StatementPart;
 import com.github.schlak.database.Definition.StatementBoxes.DeleteBox;
 import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
 import com.github.schlak.database.Exeptions.SQLAppendException;
@@ -43,8 +44,6 @@ public class MysqlDeleteBox extends DeleteBox {
                 addCondition(((DeleteBox) statementBox).getConditionStack());
 
         this.conditionStack = conditionStack;
-
-
     }
 
     @Override
@@ -60,7 +59,12 @@ public class MysqlDeleteBox extends DeleteBox {
     @Override
     public String getPreparedStatementString(){
         PreparedStatementPart statementPart = this.conditionStack.getStatementPreparationBox();
-        return "DELETE " + this.tableName + " WHERE " + statementPart.string + ";";
+        StatementPart wherePart = new StatementPart();
+
+        wherePart.setSqlPart("WHERE ");
+        wherePart.setValue(statementPart.string);
+
+        return "DELETE " + this.tableName + " "+ wherePart.getString() + ";";
     }
 
     @Override

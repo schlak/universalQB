@@ -27,7 +27,7 @@ public abstract class UpdateBox extends StatementBox {
     /**
      * Instantiates a new Update box.
      *
-     * @param tableName           the table name
+     * @param tableName           the tableName name
      * @param valueAllocationList the value allocation list
      * @param whereConditionStack the where condition stack
      */
