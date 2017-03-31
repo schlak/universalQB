@@ -1,7 +1,10 @@
 package com.github.schlak.database.Definition.StatementBoxes;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
+import com.github.schlak.database.ObjectRecycler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,24 +12,19 @@ import java.util.List;
  */
 public abstract class BasicCreateBox extends StatementBox {
 
-    /**
-     * The Column definition list.
-     */
     protected List<ColumnDefinition> columnDefinitionList;
-    /**
-     * The Table name.
-     */
     protected String tableName;
 
     /**
      * Instantiates a new Create box.
-     *
-     * @param columnDefinitionList the column definition list
-     * @param tableName            the table name
      */
-    public BasicCreateBox(List<ColumnDefinition> columnDefinitionList, String tableName) {
-        this.columnDefinitionList = columnDefinitionList;
+    public BasicCreateBox() {
+
+    }
+
+    public void init(List<ColumnDefinition> columnDefinitionList, String tableName){
         this.tableName = tableName;
+        this.columnDefinitionList = columnDefinitionList;
     }
 
     @Override
@@ -45,5 +43,17 @@ public abstract class BasicCreateBox extends StatementBox {
         BasicCreateBox createBox = (BasicCreateBox) obj;
 
         return createBox.tableName.equals(this.tableName);
+    }
+
+    @Override
+    public void clean() {
+        if (this.columnDefinitionList != null){
+            this.columnDefinitionList.forEach(ObjectRecycler::returnInstance);
+            this.columnDefinitionList.clear();
+        }else{
+            this.columnDefinitionList = new ArrayList<>();
+        }
+
+        this.tableName = "";
     }
 }

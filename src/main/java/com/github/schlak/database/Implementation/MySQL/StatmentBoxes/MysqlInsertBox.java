@@ -1,7 +1,7 @@
 package com.github.schlak.database.Implementation.MySQL.StatmentBoxes;
 
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
-import com.github.schlak.database.Definition.StatementBoxes.InsertBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicInsertBox;
 import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
 import com.github.schlak.database.Exeptions.SQLAppendException;
 
@@ -15,10 +15,9 @@ import java.util.Queue;
 /**
  * Created by Jonas Schlak on 25.01.17.
  */
-public class MysqlInsertBox extends InsertBox {
+public class MysqlInsertBox extends BasicInsertBox {
 
-    public MysqlInsertBox(String tableName, List<ValueAllocation> valueAllocationList) {
-        super(tableName, valueAllocationList);
+    public MysqlInsertBox() {
     }
 
     @Override
@@ -28,7 +27,7 @@ public class MysqlInsertBox extends InsertBox {
 
     @Override
     public boolean validateAppend(StatementBox statementBox) {
-        return super.validateAppend(statementBox) && this.tableName.equals(((InsertBox) statementBox).getTableName());
+        return super.validateAppend(statementBox) && this.tableName.equals(((BasicInsertBox) statementBox).getTableName());
     }
 
     @Override
@@ -52,7 +51,7 @@ public class MysqlInsertBox extends InsertBox {
 
         if (!validateAppend(statementBox)) throw new SQLAppendException();
 
-        this.valueAllocationList.addAll(((InsertBox) statementBox).getValueAllocationList());
+        this.valueAllocationList.addAll(((BasicInsertBox) statementBox).getValueAllocationList());
     }
 
     @Override

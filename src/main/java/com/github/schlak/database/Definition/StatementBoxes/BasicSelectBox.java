@@ -1,54 +1,29 @@
 package com.github.schlak.database.Definition.StatementBoxes;
 
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak on 24.01.17.
  */
-public abstract class SelectBox extends StatementBox {
+public abstract class BasicSelectBox extends StatementBox {
 
-    /**
-     * The Table name.
-     */
     protected String tableName;
-
-    /**
-     * The Shown column list.
-     */
     protected String shownColumnList;
-    /**
-     * The Order a oder by column list.
-     */
     protected String orderAOderByColumnList;
-    /**
-     * The Grouping column list.
-     */
     protected String groupingColumnList;
-    /**
-     * The Table join information list.
-     */
     protected String tableJoinInformationList;
-    /**
-     * The Where condition stack.
-     */
     protected ConditionStack whereConditionStack;
-    /**
-     * The Having condition stack.
-     */
     protected ConditionStack havingConditionStack;
 
     /**
      * Instantiates a new Select box.
-     *
-     * @param tableName                the tableName name
-     * @param shownColumnList          the shown column list
-     * @param orderAOderByColumnList   the order a oder by column list
-     * @param groupingColumnList       the grouping column list
-     * @param tableJoinInformationList the tableName join information list
-     * @param whereConditionStack      the where condition stack
-     * @param havingConditionStack     the having condition stack
      */
-    public SelectBox(String tableName, String shownColumnList,
+    public BasicSelectBox() {
+        clean();
+    }
+
+    public void init(String tableName, String shownColumnList,
                      String orderAOderByColumnList, String groupingColumnList,
                      String tableJoinInformationList,
                      ConditionStack whereConditionStack,
@@ -64,6 +39,21 @@ public abstract class SelectBox extends StatementBox {
 
     @Override
     public Class getType() {
-        return SelectBox.class;
+        return BasicSelectBox.class;
+    }
+
+    @Override
+    public void clean() {
+
+        if (whereConditionStack != null)
+            ObjectRecycler.returnInstance(whereConditionStack);
+        if (havingConditionStack != null)
+            ObjectRecycler.returnInstance(havingConditionStack);
+
+        this.tableName = "";
+        this.shownColumnList = "";
+        this.orderAOderByColumnList = "";
+        this.groupingColumnList = "";
+        this.tableJoinInformationList = "";
     }
 }

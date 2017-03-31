@@ -15,10 +15,6 @@ import java.util.Queue;
  */
 public class MysqlCreateBox extends BasicCreateBox {
 
-    public MysqlCreateBox(List<ColumnDefinition> columnDefinitionList, String tableName) {
-        super(columnDefinitionList, tableName);
-    }
-
     @Override
     public PreparedStatement getStatement(Connection connection) throws SQLException {
         return connection.prepareStatement("CREATE TABLE " +

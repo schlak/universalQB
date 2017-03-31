@@ -1,6 +1,8 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.FixedValues.BasicJoinType;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,33 +10,19 @@ import java.util.List;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class TableJoinInformation {
+public abstract class TableJoinInformation implements Cleanable {
 
-    /**
-     * The Base tableName.
-     */
+
     protected String baseTable;
-    /**
-     * The Table to join.
-     */
     protected String tableToJoin;
-    /**
-     * The {@link JoinCondition}.
-     */
     protected List<JoinCondition> joinCondition;
-    /**
-     * The {@link BasicJoinType}.
-     */
     protected BasicJoinType joinType;
 
     /**
      * Instantiates a new {@link TableJoinInformation}.
      */
     public TableJoinInformation() {
-        this.tableToJoin = "";
-        this.baseTable = "";
-        this.joinCondition = new ArrayList<>();
-        this.joinType = BasicJoinType.LeftJoin;
+        this.clean();
     }
 
     /**
@@ -101,4 +89,19 @@ public abstract class TableJoinInformation {
     public abstract String getJoinString();
 
     public abstract JoinCondition getJoinConditionInstance();
+
+    @Override
+    public void clean() {
+
+        if (joinCondition != null){
+            joinCondition.forEach(ObjectRecycler::returnInstance);
+            joinCondition.clear();
+        }else{
+            this.joinCondition = new ArrayList<>();
+        }
+
+        this.setJoinType(BasicJoinType.LeftJoin);
+        this.baseTable = "";
+        this.tableToJoin = "";
+    }
 }

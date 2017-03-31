@@ -6,8 +6,9 @@ import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 import com.github.schlak.database.Definition.GeneralOperations.AddWhereClause;
 import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.IQuery;
-import com.github.schlak.database.Definition.StatementBoxes.DeleteBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicDeleteBox;
 import com.github.schlak.database.Exeptions.QueryBuildException;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak.
@@ -71,5 +72,15 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
     }
 
     @Override
-    public abstract DeleteBox getStatementBox() throws QueryBuildException;
+    public abstract BasicDeleteBox getStatementBox() throws QueryBuildException;
+
+    @Override
+    public void clean() {
+        if(this.whereConditionStack != null){
+            ObjectRecycler.returnInstance(this.whereConditionStack);
+            whereConditionStack = null;
+        }
+
+        this.table = "";
+    }
 }

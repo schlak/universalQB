@@ -1,5 +1,6 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.FixedValues.ConditionLinkType;
 
 import java.util.ArrayDeque;
@@ -8,7 +9,7 @@ import java.util.Queue;
 /**
  * Created by jschl on 14.01.2017.
  */
-public class PreparedStatementPart {
+public class PreparedStatementPart implements Cleanable{
 
     /**
      * The queue contains the parameters that are going to be bound to the string.
@@ -38,4 +39,9 @@ public class PreparedStatementPart {
 
     }
 
+    @Override
+    public void clean() {
+        queue.clear();
+        string = "";
+    }
 }

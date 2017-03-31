@@ -1,17 +1,15 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
+import com.github.schlak.database.ObjectRecycler;
+
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class ValueAllocation {
+public abstract class ValueAllocation implements Cleanable {
 
-    /**
-     * The Column.
-     */
+
     protected Column column;
-    /**
-     * The Value.
-     */
     protected String value;
 
     /**
@@ -84,4 +82,13 @@ public abstract class ValueAllocation {
      */
     public abstract String getAllocationString();
 
+    @Override
+    public void clean() {
+
+        if (column != null){
+            ObjectRecycler.returnInstance(column);
+            column = null;
+        }
+        this.value = "";
+    }
 }

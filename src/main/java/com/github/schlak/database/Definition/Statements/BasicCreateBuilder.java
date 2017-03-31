@@ -8,6 +8,7 @@ import com.github.schlak.database.Definition.IQuery;
 import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox;
 import com.github.schlak.database.Exeptions.QueryBuildException;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLColumnDefinition;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public abstract class BasicCreateBuilder implements SetTable, AddColumnDefinitio
      * are stored, is done here.
      */
     public BasicCreateBuilder() {
-        this.columnDefinitionList = new ArrayList<>();
+        this.clean();
     }
 
     /*methods to set parameters, that are necessary to build the query*/
@@ -79,4 +80,16 @@ public abstract class BasicCreateBuilder implements SetTable, AddColumnDefinitio
 
     @Override
     public abstract BasicCreateBox getStatementBox() throws QueryBuildException;
+
+    @Override
+    public void clean() {
+        if (this.columnDefinitionList != null){
+            this.columnDefinitionList.forEach(ObjectRecycler::returnInstance);
+            this.columnDefinitionList.clear();
+        }else{
+            this.columnDefinitionList = new ArrayList<>();
+        }
+
+        this.tableName = "";
+    }
 }

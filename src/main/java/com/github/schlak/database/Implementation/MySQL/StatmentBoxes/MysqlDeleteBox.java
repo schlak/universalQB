@@ -5,10 +5,11 @@ import com.github.schlak.database.Definition.FixedValues.ConditionLinkType;
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Definition.GeneralObjects.PreparedStatementPart;
 import com.github.schlak.database.Definition.GeneralObjects.StatementPart;
-import com.github.schlak.database.Definition.StatementBoxes.DeleteBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicDeleteBox;
 import com.github.schlak.database.Definition.StatementBoxes.StatementBox;
 import com.github.schlak.database.Exeptions.SQLAppendException;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,10 +19,9 @@ import java.util.Queue;
 /**
  * Created by Jonas Schlak on 24.01.17.
  */
-public class MysqlDeleteBox extends DeleteBox {
+public class MysqlDeleteBox extends BasicDeleteBox {
 
-    public MysqlDeleteBox(String tableName, ConditionStack conditionStackList) {
-        super(tableName, conditionStackList);
+    public MysqlDeleteBox() {
     }
 
     @Override
@@ -41,7 +41,7 @@ public class MysqlDeleteBox extends DeleteBox {
         conditionStack.setConditionLinkType(ConditionLinkType.OR);
 
         conditionStack.addCondition(this.conditionStack).
-                addCondition(((DeleteBox) statementBox).getConditionStack());
+                addCondition(((BasicDeleteBox) statementBox).getConditionStack());
 
         this.conditionStack = conditionStack;
     }

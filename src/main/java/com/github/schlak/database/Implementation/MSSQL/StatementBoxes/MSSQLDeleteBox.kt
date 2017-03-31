@@ -3,7 +3,7 @@ package com.github.schlak.database.Implementation.MSSQL.StatementBoxes
 import com.github.schlak.database.Definition.FixedValues.ConditionLinkType
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack
 import com.github.schlak.database.Definition.GeneralObjects.StatementPart
-import com.github.schlak.database.Definition.StatementBoxes.DeleteBox
+import com.github.schlak.database.Definition.StatementBoxes.BasicDeleteBox
 import com.github.schlak.database.Definition.StatementBoxes.StatementBox
 import com.github.schlak.database.Exeptions.SQLAppendException
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack
@@ -14,7 +14,7 @@ import java.sql.PreparedStatement
  * Created by Jonas Schlak on 22.03.2017.
  */
 
-class MSSQLDeleteBox(tableName: String, conditionStack: ConditionStack) : DeleteBox(tableName,conditionStack) {
+class MSSQLDeleteBox(tableName: String, conditionStack: ConditionStack) : BasicDeleteBox(tableName,conditionStack) {
 
     override fun getStatement(connection: Connection): PreparedStatement {
         val wherePart : StatementPart = StatementPart()
@@ -37,7 +37,7 @@ class MSSQLDeleteBox(tableName: String, conditionStack: ConditionStack) : Delete
         val conditionStack = MySQLConditionStack()
         conditionStack.setConditionLinkType(ConditionLinkType.OR)
 
-        conditionStack.addCondition(this.conditionStack).addCondition((statementBox as DeleteBox).conditionStack)
+        conditionStack.addCondition(this.conditionStack).addCondition((statementBox as BasicDeleteBox).conditionStack)
 
         this.conditionStack = conditionStack
     }

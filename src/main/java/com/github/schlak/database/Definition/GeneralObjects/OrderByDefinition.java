@@ -1,26 +1,22 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.FixedValues.OrderByStrategy;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class OrderByDefinition {
+public abstract class OrderByDefinition implements Cleanable{
 
-    /**
-     * The Column.
-     */
     protected Column column;
-    /**
-     * The Db order by strategy.
-     */
     protected OrderByStrategy orderByStrategy;
 
     /**
      * Instantiates a new {@link OrderByDefinition} object.
      */
     public OrderByDefinition() {
-        this.orderByStrategy = OrderByStrategy.ASC;
+        this.clean();
     }
 
     /**
@@ -45,4 +41,14 @@ public abstract class OrderByDefinition {
      * @return the order by string
      */
     public abstract String getOrderByString();
+
+    @Override
+    public void clean() {
+
+        if (this.column != null)
+            ObjectRecycler.returnInstance(this.column);
+
+        this.column = null;
+        this.setOrderByStrategy(OrderByStrategy.ASC);
+    }
 }

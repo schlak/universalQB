@@ -10,14 +10,15 @@ import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlSelectBox;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinClause, AddGroupByClause, AddHavingClause, AddOrderByClause {
-
     private MySQLConditionStack havingConditionStack;
+
     private List<TableJoinInformation> joinList;
     private List<Column> groupByList;
     private List<OrderByDefinition> orderByList;
@@ -26,14 +27,8 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
      * Instantiates a new {@link MySQLSelectBuilder}.
      */
     public MySQLSelectBuilder() {
-        super();
-        this.whereConditionStack = new MySQLConditionStack();
-        this.havingConditionStack = new MySQLConditionStack();
-        this.joinList = new ArrayList<>();
-        this.groupByList = new ArrayList<>();
-        this.orderByList = new ArrayList<>();
+        clean();
     }
-
 
     public String toString() {
         Debug.out(new Exception().getStackTrace()[0].toString(), "do not use the getConditionString method (select)");
@@ -51,7 +46,6 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
         if (this.table == null)
             throw new QueryBuildException("No tableName is set for the query");
     }
-
 
     /**
      * The method builds a string with all columns that are in the show column list,
@@ -77,6 +71,7 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
         }
         return columnsToShowString;
     }
+
 
     /**
      * The method is connecting the joins of the join information list to one big join string
@@ -177,10 +172,14 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
     @Override
     public MysqlSelectBox getStatementBox() throws QueryBuildException {
         validate();
-        return new MysqlSelectBox(table, getColumnString(),
+        MysqlSelectBox box = ObjectRecycler.getInstance(MysqlSelectBox.class);
+
+        box.init(table, getColumnString(),
                 getOrderByString(), getGroupByString(),
                 getJoinString(), whereConditionStack,
                 havingConditionStack);
+
+        return box;
     }
 
     @Override
@@ -206,5 +205,39 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
     @Override
     public void having(ConditionStack conditionStack) {
         this.havingConditionStack.addCondition(conditionStack);
+    }
+
+    @Override
+    public void clean() {
+        super.clean();
+
+        this.whereConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
+
+        if (this.whereConditionStack != null)
+            ObjectRecycler.returnInstance(this.whereConditionStack);
+
+        havingConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
+
+        if (joinList != null) {
+            joinList.forEach(ObjectRecycler::returnInstance);
+            joinList.clear();
+        } else {
+            this.joinList = new ArrayList<>();
+        }
+
+        if (groupByList != null) {
+            groupByList.forEach(ObjectRecycler::returnInstance);
+            groupByList.clear();
+        } else {
+            this.groupByList = new ArrayList<>();
+        }
+
+        if (this.orderByList != null) {
+            this.orderByList.forEach(ObjectRecycler::returnInstance);
+            this.orderByList.clear();
+        } else {
+            this.orderByList = new ArrayList<>();
+        }
+
     }
 }

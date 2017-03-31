@@ -1,6 +1,8 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.FixedValues.ConditionLinkType;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,28 +10,18 @@ import java.util.List;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class ConditionStack {
+public abstract class ConditionStack implements Cleanable {
 
-    /**
-     * The {@link ConditionStack} list.
-     */
+
     protected List<ConditionStack> conditionStackList;
-    /**
-     * The {@link ValueAllocation} list.
-     */
     protected List<ValueAllocation> valueConditionList;
-    /**
-     * The {@link ConditionLinkType} type.
-     */
     protected ConditionLinkType conditionLinkType;
 
     /**
      * Instantiates a new {@link ConditionStack}.
      */
     public ConditionStack() {
-        this.conditionStackList = new ArrayList<>();
-        this.valueConditionList = new ArrayList<>();
-        this.conditionLinkType = ConditionLinkType.AND;
+        this.clean();
     }
 
     /**
@@ -78,4 +70,24 @@ public abstract class ConditionStack {
      * @return the {@link PreparedStatementPart}
      */
     public abstract PreparedStatementPart getStatementPreparationBox();
+
+    @Override
+    public void clean() {
+
+        if (conditionStackList != null){
+            conditionStackList.forEach(ObjectRecycler::returnInstance);
+            conditionStackList.clear();
+        }else {
+            conditionStackList = new ArrayList<>();
+        }
+
+        if (valueConditionList != null){
+            valueConditionList.forEach(ObjectRecycler::returnInstance);
+            valueConditionList.clear();
+        }else{
+            valueConditionList = new ArrayList<>();
+        }
+
+        this.setConditionLinkType(ConditionLinkType.AND);
+    }
 }

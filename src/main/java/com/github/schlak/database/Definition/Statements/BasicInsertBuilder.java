@@ -4,8 +4,9 @@ import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.GeneralOperations.SetValue;
 import com.github.schlak.database.Definition.IQuery;
-import com.github.schlak.database.Definition.StatementBoxes.InsertBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicInsertBox;
 import com.github.schlak.database.Exeptions.QueryBuildException;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +16,7 @@ import java.util.List;
  */
 public abstract class BasicInsertBuilder implements SetTable, SetValue, IQuery {
 
-    /**
-     * The tableName name field contains the name of the created tableName. It is used in this class to
-     * generify the logic how a tableName name is set and stored in the create builder.
-     */
     protected String tableName;
-
-    /**
-     * The value allocation list is used to store all {@link ValueAllocation value allocations}. These will be
-     * inserted as a neu data set into the defined tableName.
-     */
     protected List<ValueAllocation> valueAllocationList;
 
     /**
@@ -62,5 +54,18 @@ public abstract class BasicInsertBuilder implements SetTable, SetValue, IQuery {
     }
 
     @Override
-    public abstract InsertBox getStatementBox() throws QueryBuildException;
+    public abstract BasicInsertBox getStatementBox() throws QueryBuildException;
+
+    @Override
+    public void clean() {
+
+        if (valueAllocationList != null) {
+            valueAllocationList.forEach(ObjectRecycler::returnInstance);
+            valueAllocationList.clear();
+        }else{
+            this.valueAllocationList = new ArrayList<>();
+        }
+
+        this.tableName = "";
+    }
 }

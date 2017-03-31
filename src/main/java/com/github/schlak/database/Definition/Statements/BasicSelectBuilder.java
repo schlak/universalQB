@@ -1,5 +1,6 @@
 package com.github.schlak.database.Definition.Statements;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
@@ -8,8 +9,9 @@ import com.github.schlak.database.Definition.GeneralOperations.AddLimitClause;
 import com.github.schlak.database.Definition.GeneralOperations.AddWhereClause;
 import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.IQuery;
-import com.github.schlak.database.Definition.StatementBoxes.SelectBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicSelectBox;
 import com.github.schlak.database.Exeptions.QueryBuildException;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +21,10 @@ import java.util.List;
  */
 public abstract class BasicSelectBuilder implements SetTable, AddColumnToShow,
         AddWhereClause, AddLimitClause,
-        IQuery {
-    /**
-     * The list of columns that should be in the result.
-     */
+        IQuery, Cleanable{
+
     protected List<Column> columnList;
-    /**
-     * The Table name.
-     */
     protected String table;
-    /**
-     * The where condition stack.
-     */
     protected ConditionStack whereConditionStack;
     /**
      * The limit of data sets the query will effect.
@@ -41,9 +35,7 @@ public abstract class BasicSelectBuilder implements SetTable, AddColumnToShow,
     protected int limit;
 
     public BasicSelectBuilder() {
-        this.columnList = new ArrayList<>();
-
-        this.limit = 0;
+        this.clean();
     }
 
     @Override
@@ -73,5 +65,23 @@ public abstract class BasicSelectBuilder implements SetTable, AddColumnToShow,
     }
 
     @Override
-    public abstract SelectBox getStatementBox() throws QueryBuildException;
+    public abstract BasicSelectBox getStatementBox() throws QueryBuildException;
+
+    @Override
+    public void clean() {
+
+        if (this.columnList != null){
+            this.columnList.forEach(ObjectRecycler::returnInstance);
+            this.columnList.clear();
+        }
+
+        if(this.whereConditionStack != null){
+            ObjectRecycler.returnInstance(this.whereConditionStack);
+            whereConditionStack = null;
+        }
+
+        this.table = "";
+        this.limit = 0;
+    }
+
 }

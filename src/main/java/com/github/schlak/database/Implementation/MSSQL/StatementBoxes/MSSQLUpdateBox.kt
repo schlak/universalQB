@@ -2,7 +2,7 @@ package com.github.schlak.database.Implementation.MSSQL.StatementBoxes
 
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation
-import com.github.schlak.database.Definition.StatementBoxes.UpdateBox
+import com.github.schlak.database.Definition.StatementBoxes.BasicUpdateBox
 import jdk.internal.org.objectweb.asm.tree.analysis.Value
 import java.sql.Connection
 import java.sql.PreparedStatement
@@ -12,7 +12,7 @@ import java.util.*
  * Created by Jonas Schlak on 22.03.2017.
  */
 class MSSQLUpdateBox(tableName: String, valueAllocationList: List<ValueAllocation>, whereConditionStack: ConditionStack) :
-        UpdateBox(tableName, valueAllocationList, whereConditionStack) {
+        BasicUpdateBox(tableName, valueAllocationList, whereConditionStack) {
 
     override fun getStatement(connection: Connection): PreparedStatement {
         var isFirst = true

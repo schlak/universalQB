@@ -1,25 +1,24 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
+
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class Column {
+public abstract class Column implements Cleanable {
 
-    /**
-     * The Table name.
-     */
     protected String tableName;
-    /**
-     * The Column name.
-     */
     protected String columnName;
+
 
     public Column(String tableName, String columnName){
         this.setTableName(tableName);
         this.setColumnName(columnName);
     }
 
-    public Column(){};
+    public Column(){
+        this.clean();
+    };
 
     /**
      * Get the column name.
@@ -67,4 +66,10 @@ public abstract class Column {
      * @return the column string
      */
     public abstract String getColumnString();
+
+    @Override
+    public void clean() {
+        this.columnName = "";
+        this.tableName = "";
+    }
 }

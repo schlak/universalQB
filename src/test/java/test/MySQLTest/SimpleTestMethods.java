@@ -7,9 +7,9 @@ import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 import com.github.schlak.database.Definition.QueryFactory;
 import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox;
-import com.github.schlak.database.Definition.StatementBoxes.InsertBox;
-import com.github.schlak.database.Definition.StatementBoxes.SelectBox;
-import com.github.schlak.database.Definition.StatementBoxes.UpdateBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicInsertBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicSelectBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicUpdateBox;
 import com.github.schlak.database.Definition.Statements.BasicCreateBuilder;
 import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
 import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
@@ -80,9 +80,9 @@ public class SimpleTestMethods {
         insertBuilder.set(valueAllocation_id);
         insertBuilder.set(valueAllocation_name);
 
-        InsertBox insertBox = insertBuilder.getStatementBox();
+        BasicInsertBox basicInsertBox = insertBuilder.getStatementBox();
 
-        insertBox.getPreparedStatement(connectionPool.getConnection()).execute();
+        basicInsertBox.getPreparedStatement(connectionPool.getConnection()).execute();
     }
 
     public static void CselectTest(String TABLE) throws Exception {
@@ -95,7 +95,7 @@ public class SimpleTestMethods {
 
         selectBuilder.setTableName(TABLE);
 
-        SelectBox selectBox = selectBuilder.getStatementBox();
+        BasicSelectBox selectBox = selectBuilder.getStatementBox();
         selectBox.getPreparedStatement(connectionPool.getConnection()).execute();
 
     }
@@ -118,8 +118,8 @@ public class SimpleTestMethods {
 
         updateBuilder.set(valueAllocation_name);
 
-        UpdateBox updateBox = updateBuilder.getStatementBox();
-        updateBox.getPreparedStatement(connectionPool.getConnection()).execute();
+        BasicUpdateBox basicUpdateBox = updateBuilder.getStatementBox();
+        basicUpdateBox.getPreparedStatement(connectionPool.getConnection()).execute();
 
     }
 
