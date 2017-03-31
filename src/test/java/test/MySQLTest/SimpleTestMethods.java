@@ -15,6 +15,8 @@ import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
 import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Definition.Statements.BasicUpdateBuilder;
 import com.github.schlak.database.Implementation.MySQL.MySQLConnector;
+import com.github.schlak.database.ObjectRecycler;
+import test.DemoConnection;
 
 /**
  * Created by jschl on 17.03.2017.
@@ -23,6 +25,9 @@ public class SimpleTestMethods {
 
     public static String COLUMN_ID = "id";
     public static String COLUMN_NAME = "name";
+
+    public static StringBuilder stringBuilder;
+
 
     public static void AcreateTest(String TABLE) throws Exception {
 
@@ -52,7 +57,10 @@ public class SimpleTestMethods {
         BasicCreateBox createBox = createBuilder.getStatementBox();
 
 
-        createBox.getPreparedStatement(connectionPool.getConnection()).execute();
+        createBox.getPreparedStatement(new DemoConnection()).execute();
+
+//        ObjectRecycler.returnInstance(createBox);
+        ObjectRecycler.returnInstance(createBuilder);
     }
 
     public static void BinsertTest(String TABLE) throws Exception {
@@ -72,7 +80,8 @@ public class SimpleTestMethods {
         columnName.setTableName(TABLE).setColumnName(COLUMN_NAME);
 
         ValueAllocation valueAllocation_id = factory.getNewValueAllocationInstance();
-        valueAllocation_id.setColumn(columnID).setValue(factory.getIdProvider().getNewID(TABLE) + "");
+//        valueAllocation_id.setColumn(columnID).setValue(factory.getIdProvider().getNewID(TABLE) + "");
+        valueAllocation_id.setColumn(columnID).setValue("1");
 
         ValueAllocation valueAllocation_name = factory.getNewValueAllocationInstance();
         valueAllocation_name.setColumn(columnName).setValue("Bla");
@@ -82,7 +91,10 @@ public class SimpleTestMethods {
 
         BasicInsertBox basicInsertBox = insertBuilder.getStatementBox();
 
-        basicInsertBox.getPreparedStatement(connectionPool.getConnection()).execute();
+        basicInsertBox.getPreparedStatement(new DemoConnection()).execute();
+
+//        ObjectRecycler.returnInstance(basicInsertBox);
+        ObjectRecycler.returnInstance(insertBuilder);
     }
 
     public static void CselectTest(String TABLE) throws Exception {
@@ -96,8 +108,10 @@ public class SimpleTestMethods {
         selectBuilder.setTableName(TABLE);
 
         BasicSelectBox selectBox = selectBuilder.getStatementBox();
-        selectBox.getPreparedStatement(connectionPool.getConnection()).execute();
+        selectBox.getPreparedStatement(new DemoConnection()).execute();
 
+//        ObjectRecycler.returnInstance(selectBox);
+        ObjectRecycler.returnInstance(selectBuilder);
     }
 
     public static void DupdateTest(String TABLE, String newText) throws Exception {
@@ -119,7 +133,9 @@ public class SimpleTestMethods {
         updateBuilder.set(valueAllocation_name);
 
         BasicUpdateBox basicUpdateBox = updateBuilder.getStatementBox();
-        basicUpdateBox.getPreparedStatement(connectionPool.getConnection()).execute();
+        basicUpdateBox.getPreparedStatement(new DemoConnection()).execute();
+
+        ObjectRecycler.returnInstance(updateBuilder);
 
     }
 
@@ -127,29 +143,58 @@ public class SimpleTestMethods {
 
         ConnectionPool connectionPool = ConnectionPool.getInstance(new MySQLConnector().getDatabaseIdentifier());
 
-        connectionPool.getConnection().prepareStatement("DROP TABLE IF EXISTS " + TABLE).execute();
+        stringBuilder = new StringBuilder();
+
+        stringBuilder.append("DROP TABLE IF EXISTS ").append(TABLE);
+//        connectionPool.getConnection().prepareStatement(stringBuilder.toString()).execute();
+        new DemoConnection().prepareStatement(stringBuilder.toString()).execute();
     }
 
 
     public static void normalSelect(String Table)throws Exception{
-        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("SELECT  * FROM " + Table).execute();
+
+        stringBuilder = new StringBuilder();
+
+        stringBuilder.append("SELECT  * FROM ").append(Table);
+//        ConnectionPool.getDefaultInstance().getConnection().prepareStatement(stringBuilder.toString()).execute();
+        new DemoConnection().prepareStatement(stringBuilder.toString()).execute();
     }
 
     public static void normalCreate(String Table)throws Exception{
-        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("CREATE TABLE "+ Table +"(id INTEGER, name TEXT);").execute();
+
+        stringBuilder = new StringBuilder();
+
+        stringBuilder.append("CREATE TABLE ").append(Table).append("(id INTEGER, name TEXT);");
+        new DemoConnection().prepareStatement(stringBuilder.toString()).execute();
+//        ConnectionPool.getDefaultInstance().getConnection().prepareStatement(stringBuilder.toString()).execute();
     }
 
     public static void normalInsert(String Table, String id)throws Exception{
-        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("INSERT INTO "+ Table +" (id, name) VALUES ( " + id + " , 'bal' );").execute();
+        stringBuilder = new StringBuilder();
+
+        stringBuilder.append("INSERT INTO ").append(Table).append(" (id, name) VALUES ( ").append(id).append(" , 'bal' );");
+        new DemoConnection().prepareStatement(stringBuilder.toString()).execute();
+//        ConnectionPool.getDefaultInstance().getConnection().prepareStatement(stringBuilder.toString()).execute();
     }
 
     public static void normalDrop(String Table)throws Exception{
-        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("DROP TABLE " + Table).execute();
+
+        stringBuilder = new StringBuilder();
+
+        stringBuilder.append("DROP TABLE ").append(Table);
+        new DemoConnection().prepareStatement(stringBuilder.toString()).execute();
+//        ConnectionPool.getDefaultInstance().getConnection().prepareStatement(stringBuilder.toString()).execute();
     }
 
 
     public static void normalUpdate(String Table)throws Exception{
-        ConnectionPool.getDefaultInstance().getConnection().prepareStatement("UPDATE "+ Table +" SET name = 'bal' ; ").execute();
+
+        stringBuilder = new StringBuilder();
+
+        stringBuilder.append("UPDATE ").append(Table).append(" SET name = 'bal' ; ");
+        new DemoConnection().prepareStatement(stringBuilder.toString()).execute();
+//        new DemoConnection().prepareStatement(stringBuilder.toString()).execute();
+//        ConnectionPool.getDefaultInstance().getConnection().prepareStatement(stringBuilder.toString()).execute();
     }
 
 }

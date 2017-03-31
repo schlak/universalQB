@@ -5,6 +5,7 @@ import com.github.schlak.database.Definition.FixedValues.BasicDataType;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
+import com.github.schlak.database.Definition.QueryFactory;
 import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox;
 import com.github.schlak.database.Definition.StatementBoxes.BasicInsertBox;
 import com.github.schlak.database.Definition.StatementBoxes.BasicSelectBox;
@@ -14,7 +15,6 @@ import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
 import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Definition.Statements.BasicUpdateBuilder;
 import com.github.schlak.database.Implementation.MySQL.MySQLConnector;
-import com.github.schlak.database.Definition.QueryFactory;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -60,6 +60,7 @@ public class SimpleTest {
 
 
         createBox.getPreparedStatement(connectionPool.getConnection()).execute();
+
     }
 
     @Test

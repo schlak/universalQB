@@ -205,12 +205,18 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
     public void clean() {
         super.clean();
 
-        this.whereConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
+        if (this.whereConditionStack != null) {
+            this.whereConditionStack.clean();
+        } else {
+            this.whereConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
+        }
 
-        if (this.havingConditionStack != null)
-            ObjectRecycler.returnInstance(this.whereConditionStack);
+        if (this.havingConditionStack != null) {
+            this.whereConditionStack.clean();
+        } else {
+            this.havingConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
+        }
 
-        havingConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
 
         if (joinList != null) {
             joinList.forEach(ObjectRecycler::returnInstance);

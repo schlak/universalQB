@@ -73,11 +73,8 @@ public abstract class BasicSelectBuilder implements SetTable, AddColumnToShow,
         if (this.columnList != null){
             this.columnList.forEach(ObjectRecycler::returnInstance);
             this.columnList.clear();
-        }
-
-        if(this.whereConditionStack != null){
-            ObjectRecycler.returnInstance(this.whereConditionStack);
-            whereConditionStack = null;
+        } else {
+            this.columnList = new ArrayList<>();
         }
 
         this.table = "";
