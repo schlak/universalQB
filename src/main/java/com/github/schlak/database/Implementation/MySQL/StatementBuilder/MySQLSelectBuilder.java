@@ -1,6 +1,5 @@
 package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
 
-import com.github.schlak.database.Debug;
 import com.github.schlak.database.Definition.GeneralObjects.*;
 import com.github.schlak.database.Definition.GeneralOperations.AddGroupByClause;
 import com.github.schlak.database.Definition.GeneralOperations.AddHavingClause;
@@ -17,8 +16,8 @@ import java.util.List;
 
 
 public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinClause, AddGroupByClause, AddHavingClause, AddOrderByClause {
-    private MySQLConditionStack havingConditionStack;
 
+    private MySQLConditionStack havingConditionStack;
     private List<TableJoinInformation> joinList;
     private List<Column> groupByList;
     private List<OrderByDefinition> orderByList;
@@ -28,11 +27,6 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
      */
     public MySQLSelectBuilder() {
         clean();
-    }
-
-    public String toString() {
-        Debug.out(new Exception().getStackTrace()[0].toString(), "do not use the getConditionString method (select)");
-        return "";
     }
 
     /**
@@ -213,7 +207,7 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
 
         this.whereConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
 
-        if (this.whereConditionStack != null)
+        if (this.havingConditionStack != null)
             ObjectRecycler.returnInstance(this.whereConditionStack);
 
         havingConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);

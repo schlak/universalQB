@@ -6,6 +6,7 @@ import com.github.schlak.database.Definition.Statements.BasicCreateBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLColumnDefinition;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlCreateBox;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak on 29.10.2016.
@@ -14,7 +15,7 @@ public class MySQLCreateBuilder extends BasicCreateBuilder {
 
     @Override
     public ColumnDefinition getNewColumnDefinition() {
-        return new MySQLColumnDefinition();
+        return ObjectRecycler.getInstance(MySQLColumnDefinition.class);
     }
 
 
@@ -30,7 +31,11 @@ public class MySQLCreateBuilder extends BasicCreateBuilder {
     @Override
     public BasicCreateBox getStatementBox() throws QueryBuildException {
         validate();
-        return new MysqlCreateBox(columnDefinitionList, tableName);
+
+        MysqlCreateBox box = ObjectRecycler.getInstance(MysqlCreateBox.class);
+        box.init(columnDefinitionList, tableName);
+
+        return box;
     }
 
 }

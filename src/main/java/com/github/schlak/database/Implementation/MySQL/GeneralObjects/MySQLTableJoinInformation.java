@@ -4,6 +4,7 @@ import com.github.schlak.database.Definition.FixedValues.BasicJoinType;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.JoinCondition;
 import com.github.schlak.database.Definition.GeneralObjects.TableJoinInformation;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
@@ -37,7 +38,7 @@ public class MySQLTableJoinInformation extends TableJoinInformation {
 
     @Override
     public JoinCondition getJoinConditionInstance() {
-        return new MySQLJoinCondition();
+        return ObjectRecycler.getInstance(MySQLJoinCondition.class);
     }
 
     @Override

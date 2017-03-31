@@ -1,17 +1,16 @@
 package com.github.schlak.database.Implementation.MSSQL.StatementBoxes
 
-import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation
 import com.github.schlak.database.Definition.StatementBoxes.BasicInsertBox
 import com.github.schlak.database.Definition.StatementBoxes.StatementBox
 import com.github.schlak.database.Exeptions.SQLAppendException
 import java.sql.Connection
 import java.sql.PreparedStatement
-import java.util.*
 
 /**
  * Created by Jonas Schlak on 22.03.2017.
  */
-class MSSQLInsertBox(tableName : String, valueAllocationList : List<ValueAllocation>) : BasicInsertBox(tableName,valueAllocationList) {
+class MSSQLInsertBox : BasicInsertBox() {
+
     override fun getStatement(connection: Connection): PreparedStatement {
         return connection.prepareStatement(
                 "INSERT INTO " + this.tableName + " " +

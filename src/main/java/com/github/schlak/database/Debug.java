@@ -28,6 +28,4 @@ public class Debug {
     public static void out(String message) {
         out("DEBUG OUTPUT", message);
     }
-
-
 }

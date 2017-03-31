@@ -1,6 +1,5 @@
 package com.github.schlak.database.Implementation.MSSQL.StatementBoxes
 
-import com.github.schlak.database.Definition.GeneralObjects.ConditionStack
 import com.github.schlak.database.Definition.StatementBoxes.BasicSelectBox
 import java.sql.Connection
 import java.sql.PreparedStatement
@@ -9,14 +8,7 @@ import java.util.*
 /**
  * Created by Jonas Schlak on 22.03.2017.
  */
-class MSSQLSelectBox(tableName: String, shownColumnList: String,
-                     orderAOderByColumnList: String, groupingColumnList: String,
-                     tableJoinInformationList: String,
-                     whereConditionStack: ConditionStack,
-                     havingConditionStack: ConditionStack) :
-        BasicSelectBox(tableName, shownColumnList, orderAOderByColumnList, groupingColumnList,
-                tableJoinInformationList, whereConditionStack, havingConditionStack) {
-
+class MSSQLSelectBox : BasicSelectBox() {
 
     override fun getStatement(connection: Connection?): PreparedStatement {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

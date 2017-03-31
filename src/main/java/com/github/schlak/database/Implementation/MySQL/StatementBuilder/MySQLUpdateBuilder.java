@@ -41,15 +41,15 @@ public class MySQLUpdateBuilder extends BasicUpdateBuilder implements Cleanable 
         validate();
 
         MysqlUpdateBox box = ObjectRecycler.getInstance(MysqlUpdateBox.class);
+        box.init(table, valueAllocationList, whereConditionStack);
 
-        box.init(table, valueAllocationList,
-                whereConditionStack);
         return box;
     }
 
     @Override
     public void clean() {
         super.clean();
+
         this.whereConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
     }
 }

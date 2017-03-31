@@ -1,7 +1,6 @@
 package com.github.schlak.database.Implementation.MSSQL.StatementBoxes
 
 import com.github.schlak.database.Definition.FixedValues.ConditionLinkType
-import com.github.schlak.database.Definition.GeneralObjects.ConditionStack
 import com.github.schlak.database.Definition.GeneralObjects.StatementPart
 import com.github.schlak.database.Definition.StatementBoxes.BasicDeleteBox
 import com.github.schlak.database.Definition.StatementBoxes.StatementBox
@@ -14,7 +13,7 @@ import java.sql.PreparedStatement
  * Created by Jonas Schlak on 22.03.2017.
  */
 
-class MSSQLDeleteBox(tableName: String, conditionStack: ConditionStack) : BasicDeleteBox(tableName,conditionStack) {
+class MSSQLDeleteBox : BasicDeleteBox() {
 
     override fun getStatement(connection: Connection): PreparedStatement {
         val wherePart : StatementPart = StatementPart()

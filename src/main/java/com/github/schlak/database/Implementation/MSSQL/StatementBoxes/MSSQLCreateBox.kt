@@ -1,6 +1,5 @@
 package com.github.schlak.database.Implementation.MSSQL.StatementBoxes
 
-import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition
 import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox
 import java.sql.Connection
 import java.sql.PreparedStatement
@@ -10,8 +9,8 @@ import java.util.*
 * Created by Jonas Schlak.
 */
 
-class MSSQLCreateBox(columnDefinitionList: List<ColumnDefinition>, tableName: String) :
-        BasicCreateBox(columnDefinitionList, tableName) {
+class MSSQLCreateBox : BasicCreateBox() {
+
 
     override fun getStatement(connection: Connection): PreparedStatement {
         return connection.prepareStatement("CREATE TABLE " +
