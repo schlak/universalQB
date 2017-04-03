@@ -1,41 +1,32 @@
 package com.github.schlak.database.Definition.Statements;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 import com.github.schlak.database.Definition.GeneralOperations.AddWhereClause;
 import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.GeneralOperations.SetValue;
 import com.github.schlak.database.Definition.IQuery;
-import com.github.schlak.database.Definition.StatementBoxes.UpdateBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicUpdateBox;
 import com.github.schlak.database.Exeptions.QueryBuildException;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Jonas Schlak on 15.10.2016.
+ * Created by Jonas Schlak.
  */
-public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhereClause, IQuery {
+public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhereClause, IQuery, Cleanable{
 
-    /**
-     * The Table name.
-     */
-    protected String table = null;
-
-    /**
-     * The Value allocation list.
-     */
+    protected String table = "";
     protected List<ValueAllocation> valueAllocationList;
-    /**
-     * The Where condition stack.
-     */
     protected ConditionStack whereConditionStack;
 
     /**
      * Instantiates a new Adb update builder.
      */
     public BasicUpdateBuilder() {
-        this.valueAllocationList = new ArrayList<>();
     }
 
     /*methods to set parameters, that are necessary to build the query*/
@@ -44,7 +35,6 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      * Add value allocation adb update builder.
      *
      * @param iValueAllocation the value allocation
-     * @return the adb update builder
      */
     public void set(ValueAllocation iValueAllocation) {
         valueAllocationList.add(iValueAllocation);
@@ -54,7 +44,6 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      * Add where condition adb update builder.
      *
      * @param iValueCondition the value condition
-     * @return the adb update builder
      */
     public void where(ValueAllocation iValueCondition) {
         whereConditionStack.addCondition(iValueCondition);
@@ -64,19 +53,17 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      * Add where condition adb update builder.
      *
      * @param iConditionStack the condition stack
-     * @return the adb update builder
      */
     public void where(ConditionStack iConditionStack) {
         whereConditionStack.addCondition(iConditionStack);
     }
 
     /**
-     * Sets table.
+     * Sets tableName.
      *
-     * @param table the table
-     * @return the table
+     * @param table the tableName
      */
-    public void setTable(String table) {
+    public void setTableName(String table) {
         this.table = table;
     }
 
@@ -86,5 +73,22 @@ public abstract class BasicUpdateBuilder implements SetTable, SetValue, AddWhere
      */
 
     @Override
-    public abstract UpdateBox getStatementBox() throws QueryBuildException;
+    public abstract BasicUpdateBox getStatementBox() throws QueryBuildException;
+
+    @Override
+    public void clean() {
+        if(this.whereConditionStack != null){
+            ObjectRecycler.returnInstance(this.whereConditionStack);
+            whereConditionStack = null;
+        }
+
+        if (this.valueAllocationList != null) {
+            this.valueAllocationList.forEach(ObjectRecycler::returnInstance);
+            this.valueAllocationList.clear();
+        } else {
+            this.valueAllocationList = new ArrayList<>();
+        }
+
+        this.table = "";
+    }
 }

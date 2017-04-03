@@ -1,21 +1,22 @@
 package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.Statements.BasicUpdateBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlUpdateBox;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public class MySQLUpdateBuilder extends BasicUpdateBuilder {
+public class MySQLUpdateBuilder extends BasicUpdateBuilder implements Cleanable {
 
     /**
      * Instantiates a new {@link MySQLUpdateBuilder}.
      */
     public MySQLUpdateBuilder() {
-        super();
-        this.whereConditionStack = new MySQLConditionStack();
+        clean();
     }
 
     private void validate() throws QueryBuildException {
@@ -24,7 +25,7 @@ public class MySQLUpdateBuilder extends BasicUpdateBuilder {
             throw new QueryBuildException("No value allocation are set for the query");
 
         if (this.table == null)
-            throw new QueryBuildException("No table is set for the query");
+            throw new QueryBuildException("No tableName is set for the query");
     }
 
     /**
@@ -38,7 +39,17 @@ public class MySQLUpdateBuilder extends BasicUpdateBuilder {
     @Override
     public MysqlUpdateBox getStatementBox() throws QueryBuildException {
         validate();
-        return new MysqlUpdateBox(table, valueAllocationList,
-                whereConditionStack);
+
+        MysqlUpdateBox box = ObjectRecycler.getInstance(MysqlUpdateBox.class);
+        box.init(table, valueAllocationList, whereConditionStack);
+
+        return box;
+    }
+
+    @Override
+    public void clean() {
+        super.clean();
+
+        this.whereConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
     }
 }

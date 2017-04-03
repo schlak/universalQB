@@ -1,6 +1,8 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
 import com.github.schlak.database.Definition.FixedValues.BasicJoinType;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,33 +10,19 @@ import java.util.List;
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class TableJoinInformation {
+public abstract class TableJoinInformation implements Cleanable {
 
-    /**
-     * The Base table.
-     */
+
     protected String baseTable;
-    /**
-     * The Table to join.
-     */
     protected String tableToJoin;
-    /**
-     * The {@link JoinCondition}.
-     */
     protected List<JoinCondition> joinCondition;
-    /**
-     * The {@link BasicJoinType}.
-     */
     protected BasicJoinType joinType;
 
     /**
      * Instantiates a new {@link TableJoinInformation}.
      */
     public TableJoinInformation() {
-        this.tableToJoin = "";
-        this.baseTable = "";
-        this.joinCondition = new ArrayList<>();
-        this.joinType = BasicJoinType.LeftJoin;
+        this.clean();
     }
 
     /**
@@ -66,7 +54,7 @@ public abstract class TableJoinInformation {
         this.baseTable = baseTableColumn.getTableName();
         if (this.baseTable.equals(baseTableColumn.getTableName()) || this.baseTable.equals(""))
             this.baseTable = baseTableColumn.getTableName();
-        else throw new Exception("Illegal table exception");
+        else throw new Exception("Illegal tableName exception");
 
         JoinCondition joinCondition = this.getJoinConditionInstance();
 
@@ -85,10 +73,10 @@ public abstract class TableJoinInformation {
     public void addJoinCondition(JoinCondition joinCondition) throws Exception {
         if (joinCondition.getBaseTableName().equals(this.baseTable) || this.baseTable.equals(""))
             this.baseTable = joinCondition.getBaseTableName();
-        else throw new Exception("Illegal table exception");
+        else throw new Exception("Illegal tableName exception");
         if (joinCondition.getJoinTableName().equals(this.tableToJoin) || this.tableToJoin.equals(""))
             this.tableToJoin = joinCondition.getJoinTableName();
-        else throw new Exception("Illegal table exception");
+        else throw new Exception("Illegal tableName exception");
 
         this.joinCondition.add(joinCondition);
     }
@@ -101,4 +89,19 @@ public abstract class TableJoinInformation {
     public abstract String getJoinString();
 
     public abstract JoinCondition getJoinConditionInstance();
+
+    @Override
+    public void clean() {
+
+        if (joinCondition != null){
+            joinCondition.forEach(ObjectRecycler::returnInstance);
+            joinCondition.clear();
+        }else{
+            this.joinCondition = new ArrayList<>();
+        }
+
+        this.setJoinType(BasicJoinType.LeftJoin);
+        this.baseTable = "";
+        this.tableToJoin = "";
+    }
 }

@@ -8,10 +8,6 @@ import com.github.schlak.database.Definition.GeneralObjects.JoinCondition;
  */
 public class MySQLJoinCondition extends JoinCondition {
 
-    public MySQLJoinCondition(Column baseTableColumn, Column joinTableColumn) {
-        super(baseTableColumn, joinTableColumn);
-    }
-
     public MySQLJoinCondition() {
         super();
     }

@@ -5,8 +5,9 @@ import com.github.schlak.database.Definition.Statements.*;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.*;
 import com.github.schlak.database.Implementation.MySQL.StatementBuilder.*;
 import com.github.schlak.database.Manager.IDProvider;
-import com.github.schlak.database.QueryBuilder.Interface.IDProviderCallback;
-import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
+import com.github.schlak.database.Definition.IDProviderCallback;
+import com.github.schlak.database.Definition.QueryFactory;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
@@ -30,57 +31,57 @@ public class MySQLQueryFactory implements QueryFactory {
 
     @Override
     public BasicSelectBuilder getSelectBuilder() {
-        return new MySQLSelectBuilder();
+        return ObjectRecycler.getInstance(MySQLSelectBuilder.class);
     }
 
     @Override
     public BasicUpdateBuilder getUpdateBuilder() {
-        return new MySQLUpdateBuilder();
+        return ObjectRecycler.getInstance(MySQLUpdateBuilder.class);
     }
 
     @Override
     public BasicInsertBuilder getInsertBuilder() {
-        return new MySQLInsertBuilder();
+        return ObjectRecycler.getInstance(MySQLInsertBuilder.class);
     }
 
     @Override
     public BasicDeleteBuilder getDeleteBuilder() {
-        return new MySQLDeleteBuilder();
+        return ObjectRecycler.getInstance(MySQLDeleteBuilder.class);
     }
 
     @Override
     public BasicCreateBuilder getCreateBuilder() {
-        return new MySQLCreateBuilder();
+        return ObjectRecycler.getInstance(MySQLCreateBuilder.class);
     }
 
     @Override
     public ConditionStack getNewConditionStackInstance() {
-        return new MySQLConditionStack();
+        return ObjectRecycler.getInstance(MySQLConditionStack.class);
     }
 
     @Override
     public Column getNewDBColumnInstance() {
-        return new MySQLColumn();
+        return ObjectRecycler.getInstance(MySQLColumn.class);
     }
 
     @Override
     public JoinCondition getNewJoinConditionInstance() {
-        return new MySQLJoinCondition();
+        return ObjectRecycler.getInstance(MySQLJoinCondition.class);
     }
 
     @Override
     public OrderByDefinition getNewOrderByColumnInstance() {
-        return new MySQLOrderByDefinition();
+        return ObjectRecycler.getInstance(MySQLOrderByDefinition.class);
     }
 
     @Override
     public TableJoinInformation getNewTableJoinInformationInstance() {
-        return new MySQLTableJoinInformation();
+        return ObjectRecycler.getInstance(MySQLTableJoinInformation.class);
     }
 
     @Override
     public ValueAllocation getNewValueAllocationInstance() {
-        return new MySQLValueAllocation();
+        return ObjectRecycler.getInstance(MySQLValueAllocation.class);
     }
 
     @Override

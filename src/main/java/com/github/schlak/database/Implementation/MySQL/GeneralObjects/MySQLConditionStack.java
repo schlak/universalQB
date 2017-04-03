@@ -3,6 +3,7 @@ package com.github.schlak.database.Implementation.MySQL.GeneralObjects;
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Definition.GeneralObjects.PreparedStatementPart;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak on 15.10.2016.
@@ -36,7 +37,7 @@ public class MySQLConditionStack extends ConditionStack {
 
     @Override
     public PreparedStatementPart getStatementPreparationBox() {
-        PreparedStatementPart sPB = new PreparedStatementPart();
+        PreparedStatementPart sPB = ObjectRecycler.getInstance(PreparedStatementPart.class);
         boolean isFirst = true;
 
         for (ValueAllocation valueAllocation :

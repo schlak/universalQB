@@ -1,6 +1,8 @@
 package com.github.schlak.database.Definition.StatementBoxes;
 
 
+import com.github.schlak.database.Definition.Cleanable;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,7 +11,7 @@ import java.util.Queue;
 /**
  * Created by joans on 24.01.17.
  */
-public abstract class StatementBox {
+public abstract class StatementBox implements Cleanable {
 
     /**
      * Creates the prepared statement and returns it.

@@ -3,7 +3,7 @@ package com.github.schlak.database.Implementation.MySQL.StatmentBoxes;
 
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
 import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
-import com.github.schlak.database.Definition.StatementBoxes.UpdateBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicUpdateBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,15 +15,10 @@ import java.util.Queue;
 /**
  * Created by Jonas Schlak on 25.01.17.
  */
-public class MysqlUpdateBox extends UpdateBox {
-
-    public MysqlUpdateBox(String tableName, List<ValueAllocation> valueAllocationList, ConditionStack whereConditionStack) {
-        super(tableName, valueAllocationList, whereConditionStack);
-    }
+public class MysqlUpdateBox extends BasicUpdateBox {
 
     @Override
     public PreparedStatement getStatement(Connection connection) throws SQLException {
-
         boolean isFirst = true;
         StringBuilder stringBuilder = new StringBuilder("UPDATE " + this.tableName + " SET ");
 
@@ -61,7 +56,6 @@ public class MysqlUpdateBox extends UpdateBox {
 
     @Override
     public String getPreparedStatementString() {
-
         boolean isFirst = true;
         StringBuilder stringBuilder = new StringBuilder("UPDATE " + this.tableName + " SET ");
 

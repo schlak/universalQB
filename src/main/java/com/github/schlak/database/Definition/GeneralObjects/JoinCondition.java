@@ -1,35 +1,22 @@
 package com.github.schlak.database.Definition.GeneralObjects;
 
+import com.github.schlak.database.Definition.Cleanable;
+import com.github.schlak.database.ObjectRecycler;
+
 /**
  * Created by Jonas Schlak on 15.10.2016.
  */
-public abstract class JoinCondition {
+public abstract class JoinCondition implements Cleanable {
 
-    /**
-     * The base column.
-     */
+
     protected Column baseColumn;
-
-    /**
-     * The join column.
-     */
     protected Column joinColumn;
 
     /**
      * Instantiates a new {@link JoinCondition}.
      */
     public JoinCondition() {
-    }
-
-    /**
-     * Instantiates a new {@link JoinCondition}.
-     *
-     * @param baseTableColumn the base {@link Column}
-     * @param joinTableColumn the join {@link Column}
-     */
-    public JoinCondition(Column baseTableColumn, Column joinTableColumn) {
-        this.baseColumn = baseTableColumn;
-        this.joinColumn = joinTableColumn;
+        this.clean();
     }
 
     /**
@@ -55,18 +42,18 @@ public abstract class JoinCondition {
     }
 
     /**
-     * Returns the base table name.
+     * Returns the base tableName name.
      *
-     * @return the base table name
+     * @return the base tableName name
      */
     public String getBaseTableName() {
         return baseColumn.tableName;
     }
 
     /**
-     * Returns the join table name.
+     * Returns the join tableName name.
      *
-     * @return the join table name
+     * @return the join tableName name
      */
     public String getJoinTableName() {
         return this.joinColumn.tableName;
@@ -78,4 +65,17 @@ public abstract class JoinCondition {
      * @return the join condition string
      */
     public abstract String getJoinConditionString();
+
+    @Override
+    public void clean() {
+
+        if (this.baseColumn != null)
+            ObjectRecycler.returnInstance(this.baseColumn);
+        if (this.joinColumn != null)
+            ObjectRecycler.returnInstance(this.joinColumn);
+
+
+        this.baseColumn = null;
+        this.joinColumn = null;
+    }
 }

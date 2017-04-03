@@ -6,6 +6,6 @@ package com.github.schlak.database.Definition.FixedValues;
  * Represents the possible order strategies, that can be used in
  * the query builder for sorting the result of an select.
  */
-public enum DBOrderByStrategy {
+public enum OrderByStrategy {
     ASC,DESC
 }

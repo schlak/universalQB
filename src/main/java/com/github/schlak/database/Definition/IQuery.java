@@ -7,7 +7,7 @@ import com.github.schlak.database.Exeptions.QueryBuildException;
 /**
  * Created by jschl on 16.01.2017.
  */
-public interface IQuery {
+public interface IQuery extends Cleanable {
 
     /**
      * Returns the {@link StatementBox} of the query builder that is implementing the interface.

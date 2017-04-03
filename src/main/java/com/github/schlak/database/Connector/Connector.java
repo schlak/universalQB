@@ -1,6 +1,6 @@
 package com.github.schlak.database.Connector;
 
-import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
+import com.github.schlak.database.Definition.QueryFactory;
 
 import java.sql.Connection;
 
@@ -15,6 +15,15 @@ public abstract class Connector {
     protected String user;
     protected String password;
     protected String database;
+    protected String port;
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
 
     public void setHost(String host) {
         this.host = host;

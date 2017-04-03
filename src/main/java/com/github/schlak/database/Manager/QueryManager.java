@@ -4,7 +4,7 @@ import com.github.schlak.database.ConnectionPool;
 import com.github.schlak.database.Debug;
 import com.github.schlak.database.Definition.StatementBoxes.*;
 import com.github.schlak.database.Exeptions.SQLAppendException;
-import com.github.schlak.database.QueryBuilder.Interface.IGetConnection;
+import com.github.schlak.database.Definition.IGetConnection;
 
 import java.sql.*;
 import java.util.ArrayDeque;
@@ -24,10 +24,10 @@ public class QueryManager {
 
     private ArrayList<StatementBox> queryList = new ArrayList<>();
 
-    private ArrayList<DeleteBox> deleteBoxes = new ArrayList<>();
-    private ArrayList<CreateBox> createBoxes = new ArrayList<>();
-    private ArrayList<UpdateBox> updateBoxes = new ArrayList<>();
-    private ArrayList<InsertBox> insertBoxes = new ArrayList<>();
+    private ArrayList<BasicDeleteBox> deleteBoxes = new ArrayList<>();
+    private ArrayList<BasicCreateBox> createBoxes = new ArrayList<>();
+    private ArrayList<BasicUpdateBox> updateBoxes = new ArrayList<>();
+    private ArrayList<BasicInsertBox> insertBoxes = new ArrayList<>();
 
     /**
      * Instantiates a new {@link QueryManager}.
@@ -44,14 +44,14 @@ public class QueryManager {
     }
 
     /**
-     * Add a {@link DeleteBox} to the {@link QueryManager}.
+     * Add a {@link BasicDeleteBox} to the {@link QueryManager}.
      * The method try's to identify querys that can be connected to achieve a better performance.
      *
-     * @param deleteBox the {@link DeleteBox}
+     * @param deleteBox the {@link BasicDeleteBox}
      */
-    public void add(DeleteBox deleteBox) {
+    public void add(BasicDeleteBox deleteBox) {
 
-        for (DeleteBox b : deleteBoxes) {
+        for (BasicDeleteBox b : deleteBoxes) {
             if (b.validateAppend(deleteBox)) {
                 try {
                     b.appendStatement(deleteBox);
@@ -65,14 +65,14 @@ public class QueryManager {
     }
 
     /**
-     * Add a {@link CreateBox} to the {@link QueryManager}.
+     * Add a {@link BasicCreateBox} to the {@link QueryManager}.
      * The method try's to identify statements that got added a second time and remove the second {@link StatementBox}.
      *
-     * @param createBox the {@link CreateBox}
+     * @param createBox the {@link BasicCreateBox}
      */
-    public void add(CreateBox createBox) {
+    public void add(BasicCreateBox createBox) {
 
-        for (CreateBox stmtBox :
+        for (BasicCreateBox stmtBox :
                 createBoxes) {
             if (stmtBox.equals(createBox)) return;
         }
@@ -82,14 +82,14 @@ public class QueryManager {
     }
 
     /**
-     * Add a {@link InsertBox} to the {@link QueryManager}.
+     * Add a {@link BasicInsertBox} to the {@link QueryManager}.
      * The method try's to identify querys that can be connected to achieve a better performance.
      *
      * @param insertBox the insert box
      */
-    public void add(InsertBox insertBox) {
+    public void add(BasicInsertBox insertBox) {
 
-        for (InsertBox b : insertBoxes) {
+        for (BasicInsertBox b : insertBoxes) {
             if (b.validateAppend(insertBox)) {
                 try {
                     b.appendStatement(insertBox);
@@ -109,14 +109,14 @@ public class QueryManager {
      */
     public void add(StatementBox statementBox) {
 
-        if (statementBox.getType().equals(CreateBox.class))
-            add((CreateBox) statementBox);
-        if (statementBox.getType().equals(UpdateBox.class))
-            updateBoxes.add((UpdateBox) statementBox);
-        if (statementBox.getType().equals(InsertBox.class))
-            add((InsertBox) statementBox);
-        if (statementBox.getType().equals(DeleteBox.class))
-            add((DeleteBox) statementBox);
+        if (statementBox.getType().equals(BasicCreateBox.class))
+            add((BasicCreateBox) statementBox);
+        if (statementBox.getType().equals(BasicUpdateBox.class))
+            updateBoxes.add((BasicUpdateBox) statementBox);
+        if (statementBox.getType().equals(BasicInsertBox.class))
+            add((BasicInsertBox) statementBox);
+        if (statementBox.getType().equals(BasicDeleteBox.class))
+            add((BasicDeleteBox) statementBox);
     }
 
     /**

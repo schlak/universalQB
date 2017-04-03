@@ -2,7 +2,7 @@ package com.github.schlak.database.Manager;
 
 import com.github.schlak.database.ConnectionPool;
 import com.github.schlak.database.Definition.FixedValues.BasicDataType;
-import com.github.schlak.database.Definition.FixedValues.DBOrderByStrategy;
+import com.github.schlak.database.Definition.FixedValues.OrderByStrategy;
 import com.github.schlak.database.Definition.GeneralObjects.Column;
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
 import com.github.schlak.database.Definition.GeneralObjects.OrderByDefinition;
@@ -11,7 +11,7 @@ import com.github.schlak.database.Definition.Statements.BasicCreateBuilder;
 import com.github.schlak.database.Definition.Statements.BasicInsertBuilder;
 import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
-import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
+import com.github.schlak.database.Definition.QueryFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -83,7 +83,7 @@ public class IDProvider {
         idCountColumnDefinition.setColumn(idCountColumn).setType(BasicDataType.INTEGER);
 
 
-        createBuilder.setTable(TABLE_NAME);
+        createBuilder.setTableName(TABLE_NAME);
         createBuilder.addColumnDefinition(tableColumnDefinition);
         createBuilder.addColumnDefinition(instanceColumnDefinition);
         createBuilder.addColumnDefinition(idCountColumnDefinition);
@@ -111,7 +111,7 @@ public class IDProvider {
         QueryFactory queryBuilder = connectionPool.getQueryFactory();
         BasicSelectBuilder selectBuilder = queryBuilder.getSelectBuilder();
 
-        selectBuilder.setTable(TABLE_NAME);
+        selectBuilder.setTableName(TABLE_NAME);
         selectBuilder.limit(1);
 
         Connection connection = connectionPool.getConnection();
@@ -154,9 +154,9 @@ public class IDProvider {
         idCountColumn.setColumnName(ID_COLUMN_NAME).setTableName(TABLE_NAME);
 
         OrderByDefinition tableOrderByColumn = queryBuilder.getNewOrderByColumnInstance();
-        tableOrderByColumn.setColumn(idCountColumn).setDBOrderBYStrategy(DBOrderByStrategy.DESC);
+        tableOrderByColumn.setColumn(idCountColumn).setOrderByStrategy(OrderByStrategy.DESC);
 
-        selectBuilder.setTable(TABLE_NAME);
+        selectBuilder.setTableName(TABLE_NAME);
         selectBuilder.column(idCountColumn);
         selectBuilder.where(tableValueAllocation);
 
@@ -189,7 +189,7 @@ public class IDProvider {
         instanceValueAllocation.setValue(this.instanceIdentifier).
                 setColumn(instanceColumn);
 
-        insertBuilder.setTable(TABLE_NAME);
+        insertBuilder.setTableName(TABLE_NAME);
         insertBuilder.set(instanceValueAllocation);
         insertBuilder.set(idValueAllocation);
         insertBuilder.set(tableValueAllocation);

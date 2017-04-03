@@ -6,8 +6,9 @@ import com.github.schlak.database.Definition.GeneralObjects.ValueAllocation;
 import com.github.schlak.database.Definition.GeneralOperations.AddWhereClause;
 import com.github.schlak.database.Definition.GeneralOperations.SetTable;
 import com.github.schlak.database.Definition.IQuery;
-import com.github.schlak.database.Definition.StatementBoxes.DeleteBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicDeleteBox;
 import com.github.schlak.database.Exeptions.QueryBuildException;
+import com.github.schlak.database.ObjectRecycler;
 
 /**
  * Created by Jonas Schlak.
@@ -16,7 +17,7 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
 
     /**
      * The column definition list is used to store all {@link ColumnDefinition column definitions}. These will be used
-     * to create the table.
+     * to create the tableName.
      */
     protected String table = null;
 
@@ -42,7 +43,6 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
      * added to the {@link BasicDeleteBuilder#whereConditionStack where condition stack}.
      *
      * @param valueAllocation is a {@link ValueAllocation value allocation}
-     * @return the {@link BasicDeleteBuilder actual instance} for chaining the method calls
      */
     public void where(ValueAllocation valueAllocation) {
         whereConditionStack.addCondition(valueAllocation);
@@ -54,25 +54,33 @@ public abstract class BasicDeleteBuilder implements SetTable, AddWhereClause, IQ
      * added to the {@link BasicDeleteBuilder#whereConditionStack where condition stack}.
      *
      * @param conditionStack is a {@link ConditionStack condition stack}
-     * @return the {@link BasicDeleteBuilder actual instance} for chaining the method calls
      */
     public void where(ConditionStack conditionStack) {
         whereConditionStack.addCondition(conditionStack);
     }
 
     /**
-     * The method sets the given value as the table name.
+     * The method sets the given value as the tableName name.
      * <p>
-     * Set table method grants the set access to the {@link BasicDeleteBuilder#table table name} variable and
-     * offers a generified way setting the table name regardless of the database implementation.
+     * Set tableName method grants the set access to the {@link BasicDeleteBuilder#table tableName name} variable and
+     * offers a generified way setting the tableName name regardless of the database implementation.
      *
-     * @param tableName that will be set to the local variable {@link BasicDeleteBuilder#table table name}
-     * @return the {@link BasicDeleteBuilder actual instance} for chaining the method calls
+     * @param tableName that will be set to the local variable {@link BasicDeleteBuilder#table tableName name}
      */
-    public void setTable(String tableName) {
+    public void setTableName(String tableName) {
         this.table = tableName;
     }
 
     @Override
-    public abstract DeleteBox getStatementBox() throws QueryBuildException;
+    public abstract BasicDeleteBox getStatementBox() throws QueryBuildException;
+
+    @Override
+    public void clean() {
+        if(this.whereConditionStack != null){
+            ObjectRecycler.returnInstance(this.whereConditionStack);
+            whereConditionStack = null;
+        }
+
+        this.table = "";
+    }
 }

@@ -1,7 +1,7 @@
 package com.github.schlak.database.Implementation.MySQL.StatmentBoxes;
 
 import com.github.schlak.database.Definition.GeneralObjects.ColumnDefinition;
-import com.github.schlak.database.Definition.StatementBoxes.CreateBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicCreateBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +13,7 @@ import java.util.Queue;
 /**
  * Created by Jonas Schlak on 25.01.17.
  */
-public class MysqlCreateBox extends CreateBox{
-
-    public MysqlCreateBox(List<ColumnDefinition> columnDefinitionList, String tableName) {
-        super(columnDefinitionList, tableName);
-    }
+public class MysqlCreateBox extends BasicCreateBox {
 
     @Override
     public PreparedStatement getStatement(Connection connection) throws SQLException {

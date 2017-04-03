@@ -3,7 +3,7 @@ package com.github.schlak.database.Implementation.MySQL;
 
 import com.github.schlak.database.Connector.Connector;
 import com.github.schlak.database.Manager.IDProvider;
-import com.github.schlak.database.QueryBuilder.Interface.QueryFactory;
+import com.github.schlak.database.Definition.QueryFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

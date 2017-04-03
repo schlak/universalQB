@@ -1,6 +1,5 @@
 package com.github.schlak.database.Implementation.MySQL.StatementBuilder;
 
-import com.github.schlak.database.Debug;
 import com.github.schlak.database.Definition.GeneralObjects.*;
 import com.github.schlak.database.Definition.GeneralOperations.AddGroupByClause;
 import com.github.schlak.database.Definition.GeneralOperations.AddHavingClause;
@@ -10,6 +9,7 @@ import com.github.schlak.database.Definition.Statements.BasicSelectBuilder;
 import com.github.schlak.database.Exeptions.QueryBuildException;
 import com.github.schlak.database.Implementation.MySQL.GeneralObjects.MySQLConditionStack;
 import com.github.schlak.database.Implementation.MySQL.StatmentBoxes.MysqlSelectBox;
+import com.github.schlak.database.ObjectRecycler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,32 +26,20 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
      * Instantiates a new {@link MySQLSelectBuilder}.
      */
     public MySQLSelectBuilder() {
-        super();
-        this.whereConditionStack = new MySQLConditionStack();
-        this.havingConditionStack = new MySQLConditionStack();
-        this.joinList = new ArrayList<>();
-        this.groupByList = new ArrayList<>();
-        this.orderByList = new ArrayList<>();
-    }
-
-
-    public String toString() {
-        Debug.out(new Exception().getStackTrace()[0].toString(), "do not use the getConditionString method (select)");
-        return "";
+        clean();
     }
 
     /**
      * The validate method is used to rudimentary check whether it is possible or not to build a proper SQL statement based on the
-     * parameters given. For the select statement the validation only checks the table name because without a table
+     * parameters given. For the select statement the validation only checks the tableName name because without a tableName
      * name the selection could base no statement will work. The other logical dependencies are not checked.
      *
      * @throws QueryBuildException
      */
     private void validate() throws QueryBuildException {
         if (this.table == null)
-            throw new QueryBuildException("No table is set for the query");
+            throw new QueryBuildException("No tableName is set for the query");
     }
-
 
     /**
      * The method builds a string with all columns that are in the show column list,
@@ -78,12 +66,13 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
         return columnsToShowString;
     }
 
+
     /**
      * The method is connecting the joins of the join information list to one big join string
      * The parts of the string, which were generated in the {@link TableJoinInformation#getJoinString()} method
      * and get connected by spaces.
      * <p>
-     * //TODO change the method naming setTable to string to something like getJoinStatement
+     * //TODO change the method naming setTableName to string to something like getJoinStatement
      *
      * @return join string
      */
@@ -177,10 +166,14 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
     @Override
     public MysqlSelectBox getStatementBox() throws QueryBuildException {
         validate();
-        return new MysqlSelectBox(table, getColumnString(),
+        MysqlSelectBox box = ObjectRecycler.getInstance(MysqlSelectBox.class);
+
+        box.init(table, getColumnString(),
                 getOrderByString(), getGroupByString(),
                 getJoinString(), whereConditionStack,
                 havingConditionStack);
+
+        return box;
     }
 
     @Override
@@ -206,5 +199,45 @@ public class MySQLSelectBuilder extends BasicSelectBuilder implements AddJoinCla
     @Override
     public void having(ConditionStack conditionStack) {
         this.havingConditionStack.addCondition(conditionStack);
+    }
+
+    @Override
+    public void clean() {
+        super.clean();
+
+        if (this.whereConditionStack != null) {
+            this.whereConditionStack.clean();
+        } else {
+            this.whereConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
+        }
+
+        if (this.havingConditionStack != null) {
+            this.whereConditionStack.clean();
+        } else {
+            this.havingConditionStack = ObjectRecycler.getInstance(MySQLConditionStack.class);
+        }
+
+
+        if (joinList != null) {
+            joinList.forEach(ObjectRecycler::returnInstance);
+            joinList.clear();
+        } else {
+            this.joinList = new ArrayList<>();
+        }
+
+        if (groupByList != null) {
+            groupByList.forEach(ObjectRecycler::returnInstance);
+            groupByList.clear();
+        } else {
+            this.groupByList = new ArrayList<>();
+        }
+
+        if (this.orderByList != null) {
+            this.orderByList.forEach(ObjectRecycler::returnInstance);
+            this.orderByList.clear();
+        } else {
+            this.orderByList = new ArrayList<>();
+        }
+
     }
 }

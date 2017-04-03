@@ -1,7 +1,7 @@
 package com.github.schlak.database.Implementation.MySQL.StatmentBoxes;
 
 import com.github.schlak.database.Definition.GeneralObjects.ConditionStack;
-import com.github.schlak.database.Definition.StatementBoxes.SelectBox;
+import com.github.schlak.database.Definition.StatementBoxes.BasicSelectBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,11 +11,7 @@ import java.util.Queue;
 /**
  * Created by Jonas Schlak on 24.01.17.
  */
-public class MysqlSelectBox extends SelectBox {
-
-    public MysqlSelectBox(String tableName, String shownColumnList, String orderAOderByColumnList, String groupingColumnList, String tableJoinInformationList, ConditionStack whereConditionStack, ConditionStack havingConditionStack) {
-        super(tableName, shownColumnList, orderAOderByColumnList, groupingColumnList, tableJoinInformationList, whereConditionStack, havingConditionStack);
-    }
+public class MysqlSelectBox extends BasicSelectBox {
 
     @Override
     public PreparedStatement getStatement(Connection connection) throws SQLException {
